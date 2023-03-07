@@ -4,10 +4,10 @@ using ONGLIVES.API.Entities;
 namespace ONGLIVES.API.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/v{version:apiVersion}/[controller]")]
 public class JobsController : ControllerBase
 {
-
+    [ApiVersion("1.0")]
     [HttpGet("")]
     public IActionResult Get()
     {

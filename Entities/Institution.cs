@@ -1,8 +1,8 @@
 namespace ONGLIVES.API.Entities
 {
-    public class Institution
+    public class Institution : BaseEntity
     {
-        public int Id { get; set; }
+        // public int Id { get; set; }
         public string Name { get; set; }
         public string CNPJ { get; set; }
         public string Phone { get; set; }

@@ -1,14 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
 namespace ONGLIVES.API.Entities
 {
-    public class Job
+    public class Job : BaseEntity
     {
-        public int Id { get; set; }
-
+        //public int Id { get; set; }
         public int VoluntaryId { get; set; }
         public Voluntary Voluntary { get; set; }
         public int InstitutionId { get; set; }

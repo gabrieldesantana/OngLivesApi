@@ -1,8 +1,8 @@
 namespace ONGLIVES.API.Entities
 {
-    public class Voluntary
+    public class Voluntary : BaseEntity
     {
-        public int Id { get; set; }
+        // public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string CPF { get; set; }

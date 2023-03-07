@@ -4,7 +4,7 @@ using ONGLIVES.API.Entities;
 namespace ONGLIVES.API.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/v{version:apiVersion}/[controller]")]
 public class VolunteersController : ControllerBase
 {
 
@@ -36,6 +36,7 @@ public class VolunteersController : ControllerBase
     [HttpPost("")]
     public IActionResult Post()
     {
+        
         return Ok();
     }
 

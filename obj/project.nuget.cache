@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "uLqPWv3qrpwkRLTCug33VO+NBHjtV5uGYuyjQaIfVU6tqh3Cm6slGqTNFV/mIWrbEBMjYgCLL7vHlrr8t/EOnA==",
+  "dgSpecHash": "G5KXHfSJLXPUvTRILIjnnYTbA8d6pE3cuDLWuSUjQOySEdSPWEiFPKjrMsAlA+x6t0Tr6WvhQmtBu7DkFugyHw==",
   "success": true,
-  "projectFilePath": "F:\\gsgomes\\__codigos\\linguagens\\csharp\\2023\\Github\\OngLivesApi\\ONGLIVES.API.csproj",
+  "projectFilePath": "f:\\gsgomes\\__codigos\\linguagens\\csharp\\2023\\Github\\OngLivesApi\\ONGLIVES.API.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Gabriel Gomes\\.nuget\\packages\\microsoft.aspnetcore.mvc.versioning\\5.0.0\\microsoft.aspnetcore.mvc.versioning.5.0.0.nupkg.sha512",
     "C:\\Users\\Gabriel Gomes\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
     "C:\\Users\\Gabriel Gomes\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
     "C:\\Users\\Gabriel Gomes\\.nuget\\packages\\swashbuckle.aspnetcore\\6.2.3\\swashbuckle.aspnetcore.6.2.3.nupkg.sha512",
