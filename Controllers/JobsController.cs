@@ -63,6 +63,7 @@ public class JobsController : ControllerBase
             DateOfBirth = DateTime.Now,
             Gender = "Male",
             Schooling = "HighSchool",
+            Email = "mario@teste.com",
             Address = new VoluntaryAddress 
             {
                 VoluntaryId = 101,

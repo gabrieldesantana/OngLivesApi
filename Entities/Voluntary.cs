@@ -9,6 +9,7 @@ namespace ONGLIVES.API.Entities
         public DateTime DateOfBirth { get; set; }
         public string Schooling { get; set; }
         public string Gender { get; set; }
+        public string Email { get; set; }
         public VoluntaryAddress Address { get; set; }
     }
 }

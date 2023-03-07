@@ -5,7 +5,7 @@ namespace ONGLIVES.API.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class VoluntariosController : ControllerBase
+public class VolunteersController : ControllerBase
 {
 
     [HttpGet("")]

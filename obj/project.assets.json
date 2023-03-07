@@ -224,24 +224,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\dspxr\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\Gabriel Gomes\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\dspxr\\OneDrive\\Área de Trabalho\\coding\\ONGLIVES.API\\ONGLIVES.API.csproj",
+      "projectUniqueName": "F:\\gsgomes\\__codigos\\linguagens\\csharp\\2023\\Github\\OngLivesApi\\ONGLIVES.API.csproj",
       "projectName": "ONGLIVES.API",
-      "projectPath": "C:\\Users\\dspxr\\OneDrive\\Área de Trabalho\\coding\\ONGLIVES.API\\ONGLIVES.API.csproj",
-      "packagesPath": "C:\\Users\\dspxr\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\dspxr\\OneDrive\\Área de Trabalho\\coding\\ONGLIVES.API\\obj\\",
+      "projectPath": "F:\\gsgomes\\__codigos\\linguagens\\csharp\\2023\\Github\\OngLivesApi\\ONGLIVES.API.csproj",
+      "packagesPath": "C:\\Users\\Gabriel Gomes\\.nuget\\packages\\",
+      "outputPath": "F:\\gsgomes\\__codigos\\linguagens\\csharp\\2023\\Github\\OngLivesApi\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\dspxr\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\Gabriel Gomes\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -249,7 +244,6 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -292,7 +286,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.200\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
       }
     }
   }
