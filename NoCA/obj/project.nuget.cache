@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "dgSpecHash": "r1M3sHpkj5yfnuBsz3MZv7dQ4XmYK0ooVfQ0SsYALXGBr8ic7O0GDKFrrKlMvin88CgTqFpZQHM795cxMg+YdA==",
+  "success": true,
+  "projectFilePath": "F:\\gsgomes\\__codigos\\linguagens\\csharp\\2023\\Github\\OngLivesApi\\NoCA\\ONGLIVES.API.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Gabriel Gomes\\.nuget\\packages\\microsoft.aspnetcore.mvc.versioning\\5.0.0\\microsoft.aspnetcore.mvc.versioning.5.0.0.nupkg.sha512",
+    "C:\\Users\\Gabriel Gomes\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
+    "C:\\Users\\Gabriel Gomes\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\Gabriel Gomes\\.nuget\\packages\\swashbuckle.aspnetcore\\6.2.3\\swashbuckle.aspnetcore.6.2.3.nupkg.sha512",
+    "C:\\Users\\Gabriel Gomes\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.2.3\\swashbuckle.aspnetcore.swagger.6.2.3.nupkg.sha512",
+    "C:\\Users\\Gabriel Gomes\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.2.3\\swashbuckle.aspnetcore.swaggergen.6.2.3.nupkg.sha512",
+    "C:\\Users\\Gabriel Gomes\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.2.3\\swashbuckle.aspnetcore.swaggerui.6.2.3.nupkg.sha512"
+  ],
+  "logs": []
+}
