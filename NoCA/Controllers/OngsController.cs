@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
-using ONGLIVES.API.Entities;
+using ONGLIVES.API.Entidades;
+using ONGLIVESAPI.Interfaces;
 
 namespace ONGLIVES.API.Controllers;
 
@@ -8,19 +9,24 @@ namespace ONGLIVES.API.Controllers;
 [Route("api/v{version:apiVersion}/[controller]")]
 public class InstitutionsController : ControllerBase
 {
+    private readonly IOngService _service;
+    public InstitutionsController(IOngService service)
+    {
+        _service = service;
+    }
 
     [HttpGet("rota1")]
     public IActionResult Get()
     {
-        Institution institution = new Institution();
-        institution.Name = "Diego Enterprise";
-
-        if (institution == null)
+        Ong ong = new Ong();
+        ong.Nome = "Diego Enterprise";
+        
+        if (ong == null)
         {
             return BadRequest();
         }
 
-        return Ok(institution);
+        return Ok(ong);
     }
 
     [HttpPost("")]

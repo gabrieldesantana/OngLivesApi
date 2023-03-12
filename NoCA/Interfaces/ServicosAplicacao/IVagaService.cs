@@ -1,5 +1,5 @@
 namespace ONGLIVESAPI.Interfaces;
-public interface IInstitutionService 
+public interface IVagaService 
 {
 
 }

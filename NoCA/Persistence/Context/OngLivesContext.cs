@@ -1,17 +1,17 @@
-using ONGLIVES.API.Entities;
+using ONGLIVES.API.Entidades;
 namespace ONGLIVES.API.Persistence.Context 
 {
-    public class OngLivesContext 
+    public class OngLivesContext
     {
         public OngLivesContext()
         {
-            Volunteers = new List<Voluntary>();
-            Institutions = new List<Institution>();
-            Jobs = new List<Job>();
+            Voluntarios = new List<Voluntario>();
+            Ongs = new List<Ong>();
+            Vagas = new List<Vaga>();
         }
 
-        public List<Voluntary> Volunteers { get; set; }
-        public List<Institution> Institutions { get; set; }
-        public List<Job> Jobs { get; set; }
+        public List<Voluntario> Voluntarios { get; set; }
+        public List<Ong> Ongs { get; set; }
+        public List<Vaga> Vagas { get; set; }
     }
 }

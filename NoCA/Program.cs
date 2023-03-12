@@ -4,6 +4,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddSingleton<OngLivesContext>();
+
 builder.Services.AddApiVersioning();
 
 builder.Services.AddControllers();

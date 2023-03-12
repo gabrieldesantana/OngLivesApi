@@ -1,5 +1,5 @@
 namespace ONGLIVESAPI.Interfaces;
-public interface IJobService 
+public interface IOngService 
 {
-
+    
 }
