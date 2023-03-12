@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using OngLives.Core.Entidades;
 
 namespace OngLives.WebAPI.Controllers
 {
@@ -14,6 +15,8 @@ namespace OngLives.WebAPI.Controllers
         [HttpGet("")]
         public IActionResult Get()
         {
+            // var voluntary = new Voluntary();
+               
             return Ok();
         }
     }
