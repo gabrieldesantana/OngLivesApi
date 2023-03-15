@@ -16,13 +16,13 @@ public class VolunteersController : ControllerBase
         _service = service;
     }
 
-    // [HttpGet("")]
-    // public IActionResult Get()
-    // {
-    //     var voluntarios = _context.Voluntarios.ToList();
-    //     return Ok(voluntarios);
+    [HttpGet("")]
+    public IActionResult Get()
+    {
+        var voluntarios = _service.PegarTodos();
+        return Ok(voluntarios);
 
-    // }
+    }
 
     // [HttpGet("{id}")]
     // public IActionResult GetPorId(int id) 

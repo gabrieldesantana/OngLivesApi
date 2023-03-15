@@ -31,4 +31,9 @@ public class VoluntarioService : IVoluntarioService
     {
         throw new NotImplementedException();
     }
+
+    public List<Voluntario> PegarTodos()
+    {
+        return _repository.PegarTodos();
+    }
 }
