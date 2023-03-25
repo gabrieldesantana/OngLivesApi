@@ -1,9 +1,14 @@
 using ONGLIVES.API.Persistence.Context;
+using ONGLIVESAPI.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddSingleton<OngLivesContext>();
+
+builder.Services.AddScoped<IVoluntarioService, VoluntarioService>();
+builder.Services.AddScoped<IVoluntarioRepository, VoluntarioRepository>();
+
 
 builder.Services.AddApiVersioning();
 
