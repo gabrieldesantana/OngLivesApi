@@ -15,6 +15,7 @@ builder.Services.AddScoped<IVoluntarioService,VoluntarioService>();
 builder.Services.AddScoped<IVagaService,VagaService>();
 
 //Repository
+builder.Services.AddScoped<IVoluntarioRepository,VoluntarioRepository>();
 
 
 
