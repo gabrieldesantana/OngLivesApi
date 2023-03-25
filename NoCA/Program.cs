@@ -4,9 +4,20 @@ using ONGLIVESAPI.Interfaces;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+//Context
 builder.Services.AddSingleton<OngLivesContext>();
 
+<<<<<<< HEAD
+//Services
+builder.Services.AddScoped<IOngService,OngService>();
+builder.Services.AddScoped<IVoluntarioService,VoluntarioService>();
+builder.Services.AddScoped<IVagaService,VagaService>();
+
+//Repository
+=======
 builder.Services.AddScoped<IVoluntarioService, VoluntarioService>();
+>>>>>>> e3f663a221153d9d216689393a782eef95299bdf
 builder.Services.AddScoped<IVoluntarioRepository, VoluntarioRepository>();
 
 
