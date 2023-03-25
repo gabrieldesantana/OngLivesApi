@@ -8,10 +8,10 @@ namespace ONGLIVES.API.Controllers;
 [ApiController]
 [ApiVersion("1.0")]
 [Route("api/v{version:apiVersion}/[controller]")]
-public class VolunteersController : ControllerBase
+public class VoluntariosController : ControllerBase
 {
     private readonly IVoluntarioService _service;
-    public VolunteersController(IVoluntarioService service)
+    public VoluntariosController(IVoluntarioService service)
     {
         _service = service;
     }
