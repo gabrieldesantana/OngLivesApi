@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "r1M3sHpkj5yfnuBsz3MZv7dQ4XmYK0ooVfQ0SsYALXGBr8ic7O0GDKFrrKlMvin88CgTqFpZQHM795cxMg+YdA==",
+  "dgSpecHash": "WEUi5qsaWacJiNHhygFm2JtD+DjErJHvAqOOjPVtBvrszwtas/C/RdM85H42Yh+Z2vI4lqdZFKBzStbycb42fg==",
   "success": true,
-  "projectFilePath": "F:\\gsgomes\\__codigos\\linguagens\\csharp\\2023\\Github\\OngLivesApi\\NoCA\\ONGLIVES.API.csproj",
+  "projectFilePath": "F:\\gsgomes\\__codigos\\linguagens\\csharp\\2023\\Git_Github\\onglives\\OngLivesApi\\NoCA\\ONGLIVES.API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Gabriel Gomes\\.nuget\\packages\\microsoft.aspnetcore.mvc.versioning\\5.0.0\\microsoft.aspnetcore.mvc.versioning.5.0.0.nupkg.sha512",
     "C:\\Users\\Gabriel Gomes\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",

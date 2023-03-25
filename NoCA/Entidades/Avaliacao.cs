@@ -1,6 +1,6 @@
 namespace ONGLIVES.API.Entidades
 {
-    public class VoluntarioExp : Base
+    public class Avaliacao : Base
     {
         // public int Id { get; set; }
         public int IdVoluntario { get; set; }

@@ -20,6 +20,12 @@ public class VoluntariosController : ControllerBase
     public IActionResult Get()
     {
         var voluntarios = _service.PegarTodos();
+
+        if (voluntarios == null)
+        {
+            return NotFound();
+        }
+
         return Ok(voluntarios);
 
     }
@@ -38,10 +44,9 @@ public class VoluntariosController : ControllerBase
     [HttpPost("")]
     public IActionResult Post(Voluntario voluntario)
     {
-        // var voluntarios = _context.Voluntarios.ToList();
-
-
-        // _context.Voluntarios.Add(voluntario);
+        if (voluntario == null)
+            return BadRequest();
+        
         _service.Cadastrar(voluntario);
 
         return Ok(voluntario);
