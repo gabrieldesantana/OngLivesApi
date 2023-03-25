@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "F:\\gsgomes\\__codigos\\linguagens\\csharp\\2023\\Github\\OngLivesApi\\NoCA\\ONGLIVES.API.csproj": {}
+    "F:\\gsgomes\\__codigos\\linguagens\\csharp\\2023\\Git_Github\\onglives\\OngLivesApi\\NoCA\\ONGLIVES.API.csproj": {}
   },
   "projects": {
-    "F:\\gsgomes\\__codigos\\linguagens\\csharp\\2023\\Github\\OngLivesApi\\NoCA\\ONGLIVES.API.csproj": {
+    "F:\\gsgomes\\__codigos\\linguagens\\csharp\\2023\\Git_Github\\onglives\\OngLivesApi\\NoCA\\ONGLIVES.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\gsgomes\\__codigos\\linguagens\\csharp\\2023\\Github\\OngLivesApi\\NoCA\\ONGLIVES.API.csproj",
+        "projectUniqueName": "F:\\gsgomes\\__codigos\\linguagens\\csharp\\2023\\Git_Github\\onglives\\OngLivesApi\\NoCA\\ONGLIVES.API.csproj",
         "projectName": "ONGLIVES.API",
-        "projectPath": "F:\\gsgomes\\__codigos\\linguagens\\csharp\\2023\\Github\\OngLivesApi\\NoCA\\ONGLIVES.API.csproj",
+        "projectPath": "F:\\gsgomes\\__codigos\\linguagens\\csharp\\2023\\Git_Github\\onglives\\OngLivesApi\\NoCA\\ONGLIVES.API.csproj",
         "packagesPath": "C:\\Users\\Gabriel Gomes\\.nuget\\packages\\",
-        "outputPath": "F:\\gsgomes\\__codigos\\linguagens\\csharp\\2023\\Github\\OngLivesApi\\NoCA\\obj\\",
+        "outputPath": "F:\\gsgomes\\__codigos\\linguagens\\csharp\\2023\\Git_Github\\onglives\\OngLivesApi\\NoCA\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Gabriel Gomes\\AppData\\Roaming\\NuGet\\NuGet.Config",

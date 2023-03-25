@@ -20,6 +20,12 @@ public class VolunteersController : ControllerBase
     public IActionResult Get()
     {
         var voluntarios = _service.PegarTodos();
+
+        if (voluntarios == null)
+        {
+            return NotFound();
+        }
+
         return Ok(voluntarios);
 
     }
