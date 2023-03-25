@@ -9,6 +9,7 @@ builder.Services.AddSingleton<OngLivesContext>();
 builder.Services.AddScoped<IVoluntarioService, VoluntarioService>();
 builder.Services.AddScoped<IVoluntarioRepository, VoluntarioRepository>();
 
+
 builder.Services.AddApiVersioning();
 
 builder.Services.AddControllers();
