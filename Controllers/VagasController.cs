@@ -19,27 +19,27 @@ public class VagasController : ControllerBase
     [HttpGet("")]
     public IActionResult Get()
     {
-        // var voluntarios = _service.PegarTodos();
+        var vagas = _service.PegarTodos();
 
-        // if (voluntarios == null)
-        // {
-        //     return NotFound();
-        // }
+        if (vagas == null)
+        {
+            return NotFound();
+        }
 
-        return Ok();
+        return Ok(vagas);
 
     }
 
 
     [HttpPost("")]
-    public IActionResult Post(Vaga voluntario)
+    public IActionResult Post(Vaga vaga)
     {
-        if (voluntario == null)
+        if (vaga == null)
             return BadRequest();
         
         // _service.Cadastrar(voluntario);
 
-        return Ok(voluntario);
+        return Ok(vaga);
     }
 
     [HttpPut("")]
