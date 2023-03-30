@@ -8,10 +8,10 @@ namespace ONGLIVES.API.Controllers;
 [ApiController]
 [ApiVersion("1.0")]
 [Route("api/v{version:apiVersion}/[controller]")]
-public class VagasController : ControllerBase
+public class ExperienciasController : ControllerBase
 {
-    private readonly IVagaService _service;
-    public VagasController(IVagaService service)
+    private readonly IExperienciaService _service;
+    public ExperienciasController(IExperienciaService service)
     {
         _service = service;
     }
@@ -19,27 +19,27 @@ public class VagasController : ControllerBase
     [HttpGet("")]
     public IActionResult Get()
     {
-        var vagas = _service.PegarTodos();
+        var experiencias = _service.PegarTodos();
 
-        if (vagas == null)
+        if (experiencias == null)
         {
             return NotFound();
         }
 
-        return Ok(vagas);
+        return Ok(experiencias);
 
     }
 
 
     [HttpPost("")]
-    public IActionResult Post(Vaga vaga)
+    public IActionResult Post(Experiencia experiencia)
     {
-        if (vaga == null)
+        if (experiencia == null)
             return BadRequest();
-        
-        // _service.Cadastrar(voluntario);
 
-        return Ok(vaga);
+        _service.Cadastrar(experiencia);
+
+        return Ok(experiencia);
     }
 
     [HttpPut("")]
