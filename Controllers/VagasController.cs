@@ -19,6 +19,7 @@ public class VagasController : ControllerBase
     [HttpGet("")]
     public IActionResult Get()
     {
+<<<<<<< HEAD
         // var voluntarios = _service.PegarTodos();
 
         // if (voluntarios == null)
@@ -28,6 +29,9 @@ public class VagasController : ControllerBase
 
         return Ok();
 
+=======
+        return Ok();
+>>>>>>> d27c34fd5988bcef2d34a6a0b2645e798c4edbb2
     }
 
 
