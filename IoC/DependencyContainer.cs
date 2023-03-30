@@ -9,12 +9,14 @@ public static class DependecyContainer
             services.AddScoped<IOngService,OngService>();
             services.AddScoped<IVoluntarioService,VoluntarioService>();
             services.AddScoped<IVagaService,VagaService>();
+            services.AddScoped<IExperienciaService, ExperienciaService>();
         #endregion
 
         #region Repository
-            services.AddScoped<IOngRepository,OngRepository>();
+        services.AddScoped<IOngRepository,OngRepository>();
             services.AddScoped<IVoluntarioRepository,VoluntarioRepository>();
             services.AddScoped<IVagaRepository,VagaRepository>();
+            services.AddScoped<IExperienciaRepository, ExperienciaRepository>();
         #endregion
     }
 }
