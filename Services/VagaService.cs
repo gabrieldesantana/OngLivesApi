@@ -16,13 +16,13 @@ public class VagaService : IVagaService
             throw new Exception("Vaga sem informacoes");
 
         if (voluntarios.Exists(x => x.Id == voluntario.Id))
-            throw new Exception("VagaId já existe");
+            throw new Exception("VagaId ja existe");
 
         _repository.Cadastrar(voluntario);
         return voluntario;
     }
 
-    public void Deletar(Vaga voluntario)
+    public void Deletar(int id)
     {
         throw new NotImplementedException();
     }

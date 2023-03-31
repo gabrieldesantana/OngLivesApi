@@ -6,5 +6,5 @@ public interface IVoluntarioRepository
     public Voluntario Cadastrar(Voluntario voluntario);
     public Voluntario PegarPorId(int id);
     public Voluntario Editar (Voluntario voluntario);
-    public Voluntario Deletar(Voluntario voluntario);
+    public void Deletar(int id);
 }

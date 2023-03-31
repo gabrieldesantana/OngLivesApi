@@ -16,13 +16,13 @@ public class ExperienciaService : IExperienciaService
             throw new Exception("Experiencia sem informacoes");
 
         if (voluntarios.Exists(x => x.Id == voluntario.Id))
-            throw new Exception("ExperienciaId já existe");
+            throw new Exception("ExperienciaId ja existe");
 
         _repository.Cadastrar(voluntario);
         return voluntario;
     }
 
-    public void Deletar(Experiencia voluntario)
+    public void Deletar(int id)
     {
         throw new NotImplementedException();
     }

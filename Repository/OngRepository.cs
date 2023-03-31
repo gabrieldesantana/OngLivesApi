@@ -15,7 +15,7 @@ public class OngRepository : IOngRepository
         return ong;
     }
 
-    public Ong Deletar(Ong ong)
+    public void Deletar(int id)
     {
         throw new NotImplementedException();
     }
