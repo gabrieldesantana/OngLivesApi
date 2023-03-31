@@ -30,16 +30,16 @@ public class VoluntariosController : ControllerBase
 
     }
 
-    // [HttpGet("{id}")]
-    // public IActionResult GetPorId(int id) 
-    // {
-    //     var voluntario = _context.Voluntarios.FirstOrDefault(x => x.Id == id);
+    [HttpGet("{id}")]
+    public IActionResult GetPorId(int id) 
+    {
+        var voluntario = _service.PegarPorId(id);
 
-    //     if (voluntario == null) 
-    //         return BadRequest("Não foi possível localizar um voluntário com esse id");
+        if (voluntario == null) 
+            return BadRequest();
 
-    //     return Ok(voluntario);
-    // }
+        return Ok(voluntario);
+    }
 
     [HttpPost("")]
     public IActionResult Post(Voluntario voluntario)
@@ -53,14 +53,20 @@ public class VoluntariosController : ControllerBase
     }
 
     [HttpPut("")]
-    public IActionResult Put()
+    public IActionResult Put(Voluntario voluntario)
     {
-        return Ok();
+        if (voluntario == null)
+            return BadRequest();
+
+        var voluntarioEdit = _service.Editar(voluntario);
+
+        return Ok(voluntarioEdit);
     }
 
-    [HttpDelete("")]
-    public IActionResult Delete()
+    [HttpDelete("{id}")]
+    public IActionResult Delete(int id)
     {
+        _service.Deletar(id);
         return Ok();
     }
 

@@ -10,19 +10,20 @@ public class OngService : IOngService
     }
     public Ong Cadastrar(Ong ong)
     {
-        var ong = _repository.PegarTodos();
+        var ongs = _repository.PegarTodos();
         //validacoes
-        if (ong == null)
+        if (ongs == null)
             throw new Exception("Ong sem informacoes");
 
-        if (ong.Exists(x => x.Id == voluntario.Id))
+        if (ongs.Exists(x => x.Id == ong.Id))
             throw new Exception("OngId já existe");
 
         _repository.Cadastrar(ong);
         return ong;
     }
 
-    public void Deletar(Ong ong)
+
+    public void Deletar(int id)
     {
         throw new NotImplementedException();
     }

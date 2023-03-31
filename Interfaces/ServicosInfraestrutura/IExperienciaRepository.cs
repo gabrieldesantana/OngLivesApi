@@ -6,5 +6,5 @@ public interface IExperienciaRepository
     public Experiencia Cadastrar(Experiencia experiencia);
     public Experiencia PegarPorId(int id);
     public Experiencia Editar(Experiencia experiencia);
-    public Experiencia Deletar(Experiencia experiencia);
+    public void Deletar(int id);
 }

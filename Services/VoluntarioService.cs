@@ -22,18 +22,24 @@ public class VoluntarioService : IVoluntarioService
         return voluntario;
     }
 
-    public void Deletar(Voluntario voluntario)
+    public void Deletar(int id)
     {
-        throw new NotImplementedException();
+        _repository.Deletar(id);
     }
 
     public Voluntario Editar(Voluntario voluntario)
     {
-        throw new NotImplementedException();
+        var voluntarioEdit = _repository.Editar(voluntario);
+        return voluntarioEdit;
     }
 
     public List<Voluntario> PegarTodos()
     {
         return _repository.PegarTodos();
+    }
+
+    public Voluntario PegarPorId(int id)
+    {
+        return _repository.PegarPorId(id);
     }
 }

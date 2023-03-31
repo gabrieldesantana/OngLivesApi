@@ -15,19 +15,34 @@ public class VoluntarioRepository : IVoluntarioRepository
         return voluntario;
     }
 
-    public Voluntario Deletar(Voluntario voluntario)
+    public void Deletar(int id)
     {
-        throw new NotImplementedException();
+        var voluntario = PegarPorId(id);
+        _context.Voluntarios.Remove(voluntario);
     }
 
     public Voluntario Editar(Voluntario voluntario)
     {
-        throw new NotImplementedException();
+        var voluntarioEdit = PegarPorId(voluntario.Id);
+
+        voluntarioEdit.Nome = voluntario.Nome;
+        voluntarioEdit.CPF = voluntario.CPF;
+        voluntarioEdit.DataAniversario = voluntario.DataAniversario;
+        voluntarioEdit.Email = voluntario.Email;
+        voluntarioEdit.Telefone = voluntario.Telefone;
+        voluntarioEdit.Escolaridade = voluntario.Escolaridade;
+        voluntarioEdit.Genero = voluntario.Genero;
+        voluntarioEdit.Habilidade = voluntario.Habilidade;
+        voluntarioEdit.HorasVoluntaria = voluntario.HorasVoluntaria;
+        voluntarioEdit.QuantidadeExperiencias = voluntario.QuantidadeExperiencias;
+        voluntarioEdit.Endereco = voluntario.Endereco;
+        return voluntarioEdit;
+
     }
 
     public Voluntario PegarPorId(int id)
     {
-        throw new NotImplementedException();
+        return _context.Voluntarios.FirstOrDefault(x => x.Id == id);
     }
 
     public List<Voluntario> PegarTodos()

@@ -15,7 +15,7 @@ public class ExperienciaRepository : IExperienciaRepository
         return voluntario;
     }
 
-    public Experiencia Deletar(Experiencia voluntario)
+    public void Deletar(int id)
     {
         throw new NotImplementedException();
     }

@@ -15,7 +15,7 @@ public class VagaRepository : IVagaRepository
         return voluntario;
     }
 
-    public Vaga Deletar(Vaga voluntario)
+    public void Deletar(int id)
     {
         throw new NotImplementedException();
     }

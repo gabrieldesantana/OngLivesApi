@@ -6,5 +6,5 @@ public interface IOngRepository
     public Ong Cadastrar(Ong ong);
     public Ong PegarPorId(int id);
     public Ong Editar(Ong ong);
-    public Ong Deletar(Ong ong);
+    public void Deletar(int id);
 }
