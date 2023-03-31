@@ -18,9 +18,6 @@ namespace ONGLIVES.API.Entidades
         public int HorasVoluntaria { get; set; } //
         public int QuantidadeExperiencias { get; set; } //
 
-
-
-
         public Endereco Endereco { get; set; }
     }
 }

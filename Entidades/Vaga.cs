@@ -7,7 +7,6 @@ namespace ONGLIVES.API.Entidades
         public Voluntario Voluntario { get; set; }
         public int OngId { get; set; }
         public Ong Ong { get; set; }
-
         public string Tipo { get; set; }
         public string Turno { get; set; }
         public string Descricao { get; set; }

@@ -22,6 +22,7 @@ public class OngService : IOngService
         return ong;
     }
 
+
     public void Deletar(int id)
     {
         throw new NotImplementedException();
