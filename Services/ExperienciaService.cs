@@ -24,12 +24,18 @@ public class ExperienciaService : IExperienciaService
 
     public void Deletar(int id)
     {
-        throw new NotImplementedException();
+        _repository.Deletar(id);
     }
 
-    public Experiencia Editar(Experiencia voluntario)
+    public Experiencia Editar(Experiencia experiencia)
     {
-        throw new NotImplementedException();
+        var experienciaEdit = _repository.Editar(experiencia);
+        return experienciaEdit;
+    }
+
+    public Experiencia PegarPorId(int id)
+    {
+        return _repository.PegarPorId(id);
     }
 
     public List<Experiencia> PegarTodos()

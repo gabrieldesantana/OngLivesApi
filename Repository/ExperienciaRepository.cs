@@ -17,17 +17,29 @@ public class ExperienciaRepository : IExperienciaRepository
 
     public void Deletar(int id)
     {
-        throw new NotImplementedException();
+        var experiencia = PegarPorId(id);
+        _context.Experiencias.Remove(experiencia);
     }
 
-    public Experiencia Editar(Experiencia voluntario)
+    public Experiencia Editar(Experiencia experiencia)
     {
-        throw new NotImplementedException();
+        var experienciaEdit = PegarPorId(experiencia.Id);
+
+        experienciaEdit.IdVoluntario = experiencia.IdVoluntario;
+        experienciaEdit.NomeVoluntario = experiencia.NomeVoluntario;
+        experienciaEdit.IdVoluntario = experiencia.IdVoluntario;
+        experienciaEdit.IdOng = experiencia.IdOng;
+        experienciaEdit.NomeOng = experiencia.NomeOng;
+        experienciaEdit.ProjetoEnvolvido = experiencia.ProjetoEnvolvido;
+        experienciaEdit.Opiniao = experiencia.Opiniao;
+        experienciaEdit.Data = experiencia.Data;
+        return experienciaEdit;
+
     }
 
     public Experiencia PegarPorId(int id)
     {
-        throw new NotImplementedException();
+        return _context.Experiencias.FirstOrDefault(x => x.Id == id);
     }
 
     public List<Experiencia> PegarTodos()

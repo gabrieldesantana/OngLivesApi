@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using ONGLIVES.API.Entidades;
 using ONGLIVES.API.Persistence.Context;
+using ONGLIVES.API.VO;
 using ONGLIVESAPI.Interfaces;
 
 namespace ONGLIVES.API.Controllers;
@@ -31,6 +32,18 @@ public class ExperienciasController : ControllerBase
     }
 
 
+    [HttpGet("{id}")]
+    public IActionResult GetPorId(int id)
+    {
+        var experiencias = _service.PegarPorId(id);
+
+        if (experiencias == null)
+            return BadRequest();
+
+        return Ok(experiencias);
+    }
+
+
     [HttpPost("")]
     public IActionResult Post(Experiencia experiencia)
     {
@@ -43,14 +56,20 @@ public class ExperienciasController : ControllerBase
     }
 
     [HttpPut("")]
-    public IActionResult Put()
+    public IActionResult Put(Experiencia experiencia)
     {
-        return Ok();
+        if (experiencia == null)
+            return BadRequest();
+
+        var experienciaEdit = _service.Editar(experiencia);
+
+        return Ok(experienciaEdit);
     }
 
-    [HttpDelete("")]
-    public IActionResult Delete()
+    [HttpDelete("{id}")]
+    public IActionResult Delete(int id)
     {
+        _service.Deletar(id);
         return Ok();
     }
 

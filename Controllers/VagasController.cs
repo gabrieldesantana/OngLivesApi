@@ -36,8 +36,8 @@ public class VagasController : ControllerBase
     {
         if (vaga == null)
             return BadRequest();
-        
-        // _service.Cadastrar(voluntario);
+
+        _service.Cadastrar(vaga);
 
         return Ok(vaga);
     }
