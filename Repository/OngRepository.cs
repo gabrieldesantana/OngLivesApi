@@ -17,17 +17,27 @@ public class OngRepository : IOngRepository
 
     public void Deletar(int id)
     {
-        throw new NotImplementedException();
+        var ong = PegarPorId(id);
+        _context.Ongs.Remove(ong);
     }
 
-    public Ong Editar(Ong ong)
+    public Ong Editar(Ong ongs)
     {
-        throw new NotImplementedException();
+        var ongsEdit = PegarPorId(ongs.Id);
+
+        ongsEdit.Nome = ongs.Nome;
+        ongsEdit.CNPJ = ongs.CNPJ;
+        ongsEdit.Email = ongs.Email;
+        ongsEdit.Telefone = ongs.Telefone;
+        ongsEdit.AreaAtuacao = ongs.AreaAtuacao;
+        ongsEdit.Endereco = ongs.Endereco;
+        return ongsEdit;
+
     }
 
     public Ong PegarPorId(int id)
     {
-        throw new NotImplementedException();
+        return _context.Ongs.FirstOrDefault(x => x.Id == id);
     }
 
     public List<Ong> PegarTodos()

@@ -13,7 +13,7 @@ public class OngService : IOngService
         var ongs = _repository.PegarTodos();
         //validacoes
         if (ongs == null)
-            throw new Exception("Ong sem informacoes");
+            throw new Exception("Ong sem informações");
 
         if (ongs.Exists(x => x.Id == ong.Id))
             throw new Exception("OngId já existe");
@@ -22,19 +22,24 @@ public class OngService : IOngService
         return ong;
     }
 
-
     public void Deletar(int id)
     {
-        throw new NotImplementedException();
+        _repository.Deletar(id);
     }
 
     public Ong Editar(Ong ong)
     {
-        throw new NotImplementedException();
+        var ongEdit = _repository.Editar(ong);
+        return ongEdit;
     }
 
     public List<Ong> PegarTodos()
     {
         return _repository.PegarTodos();
+    }
+
+    public Ong PegarPorId(int id)
+    {
+        return _repository.PegarPorId(id);
     }
 }
