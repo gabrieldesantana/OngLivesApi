@@ -30,6 +30,16 @@ public class VagasController : ControllerBase
 
     }
 
+    [HttpGet("{id}")]
+    public IActionResult GetPorId(int id)
+    {
+        var vaga = _service.PegarPorId(id);
+
+        if (vaga == null)
+            return BadRequest();
+
+        return Ok(vaga);
+    }
 
     [HttpPost("")]
     public IActionResult Post(Vaga vaga)
@@ -37,20 +47,26 @@ public class VagasController : ControllerBase
         if (vaga == null)
             return BadRequest();
         
-        // _service.Cadastrar(voluntario);
+        _service.Cadastrar(vaga);
 
         return Ok(vaga);
     }
 
     [HttpPut("")]
-    public IActionResult Put()
+    public IActionResult Put(Vaga vaga)
     {
-        return Ok();
+        if (vaga == null)
+            return BadRequest();
+
+        var vagaEdit = _service.Editar(vaga);
+
+        return Ok(vagaEdit);
     }
 
     [HttpDelete("")]
-    public IActionResult Delete()
+    public IActionResult Delete(int id)
     {
+        _service.Deletar(id);
         return Ok();
     }
 
