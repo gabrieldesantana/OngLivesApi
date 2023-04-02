@@ -8,10 +8,11 @@ namespace ONGLIVES.API.Controllers;
 [ApiController]
 [ApiVersion("1.0")]
 [Route("api/v{version:apiVersion}/[controller]")]
-public class OngController : ControllerBase
+//public class OngController : ControllerBase
+public class OngsController : ControllerBase
 {
     private readonly IOngService _service;
-    public OngController(OngService service)
+    public OngsController(OngService service)
     {
         _service = service;
     }
