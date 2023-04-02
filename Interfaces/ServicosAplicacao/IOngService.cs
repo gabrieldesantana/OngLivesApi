@@ -8,5 +8,5 @@ public interface IOngService
     public Ong Cadastrar(Ong ong);
     public Ong Editar(Ong ong);
     public void Deletar(int id);
-
+    public Ong PegarPorId(int id);
 }
