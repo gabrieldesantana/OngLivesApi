@@ -8,32 +8,38 @@ public class VagaService : IVagaService
     {
         _repository = repository;
     }
-    public Vaga Cadastrar(Vaga voluntario)
+    public Vaga Cadastrar(Vaga vaga)
     {
-        var voluntarios = _repository.PegarTodos();
+        var vagas = _repository.PegarTodos();
         //validacoes
-        if (voluntario == null)
+        if (vaga == null)
             throw new Exception("Vaga sem informacoes");
 
-        if (voluntarios.Exists(x => x.Id == voluntario.Id))
+        if (vagas.Exists(x => x.Id == vaga.Id))
             throw new Exception("VagaId ja existe");
 
-        _repository.Cadastrar(voluntario);
-        return voluntario;
+        _repository.Cadastrar(vaga);
+        return vaga;
     }
 
     public void Deletar(int id)
     {
-        throw new NotImplementedException();
+        _repository.Deletar(id);
     }
 
-    public Vaga Editar(Vaga voluntario)
+    public Vaga Editar(Vaga vaga)
     {
-        throw new NotImplementedException();
+        var vagaEdit = _repository.Editar(vaga);
+        return vagaEdit;
     }
 
     public List<Vaga> PegarTodos()
     {
         return _repository.PegarTodos();
+    }
+
+    public Vaga PegarPorId(int id)
+    {
+        return _repository.PegarPorId(id);
     }
 }
