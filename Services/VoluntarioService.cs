@@ -8,9 +8,9 @@ public class VoluntarioService : IVoluntarioService
     {
         _repository = repository;
     }
-    public Voluntario Cadastrar(Voluntario voluntario)
+    public async Task<Voluntario> Cadastrar(Voluntario voluntario)
     {
-        var voluntarios = _repository.PegarTodos();
+        var voluntarios = await _repository.PegarTodos();
         //validacoes
         if (voluntario == null)
             throw new Exception("Voluntario sem informacoes");
@@ -19,27 +19,45 @@ public class VoluntarioService : IVoluntarioService
             throw new Exception("VoluntarioId já existe");
 
         _repository.Cadastrar(voluntario);
+
         return voluntario;
     }
 
-    public void Deletar(int id)
+    public async Task<Voluntario> Editar(EditVoluntarioModel voluntario)
     {
-        _repository.Deletar(id);
-    }
+        var voluntarioEdit = await _repository.PegarPorId(voluntario.Id);
 
-    public Voluntario Editar(Voluntario voluntario)
-    {
-        var voluntarioEdit = _repository.Editar(voluntario);
+        if (voluntarioEdit == null)
+            return null;
+
+        voluntarioEdit = await _repository.Editar(voluntario);
+
         return voluntarioEdit;
     }
 
-    public List<Voluntario> PegarTodos()
+    public async Task<List<Voluntario>> PegarTodos()
     {
-        return _repository.PegarTodos();
+        return await _repository.PegarTodos();
     }
 
-    public Voluntario PegarPorId(int id)
+    public async Task<Voluntario> PegarPorId(int id)
+    {   
+        var voluntario = await _repository.PegarPorId(id);
+
+        if (voluntario == null) 
+            return null;
+
+        return await _repository.PegarPorId(id);
+    }
+
+    public async Task<bool> Deletar(int id)
     {
-        return _repository.PegarPorId(id);
+        var voluntario = await _repository.PegarPorId(id);
+
+        if (voluntario == null)
+            return false;
+            //return Boolean
+        await _repository.Deletar(voluntario);
+        return true;
     }
 }
