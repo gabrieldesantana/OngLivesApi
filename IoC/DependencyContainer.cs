@@ -13,7 +13,7 @@ public static class DependecyContainer
         #endregion
 
         #region Repository
-        services.AddScoped<IOngRepository,OngRepository>();
+            services.AddScoped<IOngRepository,OngRepository>();
             services.AddScoped<IVoluntarioRepository,VoluntarioRepository>();
             services.AddScoped<IVagaRepository,VagaRepository>();
             services.AddScoped<IExperienciaRepository, ExperienciaRepository>();

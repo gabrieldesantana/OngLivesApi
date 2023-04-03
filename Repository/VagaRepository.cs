@@ -26,9 +26,9 @@ public class VagaRepository : IVagaRepository
         var vagaEdit = PegarPorId(vaga.Id);
 
         vagaEdit.VoluntarioId = vaga.VoluntarioId;
-        vagaEdit.Voluntario = vaga.Voluntario;
+        // vagaEdit.Voluntario = vaga.Voluntario;
         vagaEdit.OngId = vaga.OngId;
-        vagaEdit.Ong = vaga.Ong;
+        // vagaEdit.Ong = vaga.Ong;
         vagaEdit.Tipo = vaga.Tipo;
         vagaEdit.Turno = vaga.Turno;
         vagaEdit.Descricao = vaga.Descricao;      

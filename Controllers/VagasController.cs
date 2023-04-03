@@ -6,8 +6,9 @@ using ONGLIVESAPI.Interfaces;
 namespace ONGLIVES.API.Controllers;
 
 [ApiController]
-[ApiVersion("1.0")]
-[Route("api/v{version:apiVersion}/[controller]")]
+// [ApiVersion("1.0")]
+// [Route("api/v{version:apiVersion}/[controller]")]
+[Route("api/[controller]")]
 public class VagasController : ControllerBase
 {
     private readonly IVagaService _service;

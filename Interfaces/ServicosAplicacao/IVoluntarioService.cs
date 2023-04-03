@@ -4,10 +4,10 @@ namespace ONGLIVESAPI.Interfaces;
 
 public interface IVoluntarioService 
 {
-    public List<Voluntario> PegarTodos();
-    public Voluntario PegarPorId(int id);
-    public Voluntario Cadastrar(Voluntario voluntario);
-    public Voluntario Editar(Voluntario voluntario);
-    public void Deletar(int id);
+    public Task<List<Voluntario>> PegarTodos();
+    public Task<Voluntario> PegarPorId(int id);
+    public Task<Voluntario> Cadastrar(Voluntario voluntario);
+    public Task<Voluntario> Editar(EditVoluntarioModel voluntario);
+    public Task<bool> Deletar(int id);
 
 }
