@@ -1,6 +1,7 @@
 using ONGLIVES.API.Entidades;
 using ONGLIVES.API.Persistence.Context;
 
+//public class VoluntarioRepository : GenericRepository<Voluntario>, IVoluntarioRepository
 public class VoluntarioRepository : IVoluntarioRepository
 {
     private readonly OngLivesContext _context;
@@ -9,7 +10,12 @@ public class VoluntarioRepository : IVoluntarioRepository
     {
         _context = context;
     }
-    public async Task<Voluntario> Cadastrar(Voluntario voluntario)
+    //public VoluntarioRepository(OngLivesContext context) 
+    //    : base(context)
+    //{
+    //}
+
+    public async Task<Voluntario> Cadastrar(Voluntario voluntario) 
     {
         _context.Voluntarios.Add(voluntario);
         return voluntario;
@@ -51,3 +57,10 @@ public class VoluntarioRepository : IVoluntarioRepository
         return _context.Voluntarios.ToList();
     }
 }
+
+
+
+//public IEnumerable<Customer> GetByName(string name)
+//{
+//    return _entities.Where(c => c.Name.Contains(name)).ToList();
+//}
