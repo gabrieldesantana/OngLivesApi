@@ -6,8 +6,9 @@ using ONGLIVESAPI.Interfaces;
 namespace ONGLIVES.API.Controllers;
 
 [ApiController]
-[ApiVersion("1.0")]
-[Route("api/v{version:apiVersion}/[controller]")]
+// [ApiVersion("1.0")]
+// [Route("api/v{version:apiVersion}/[controller]")]
+[Route("api/[controller]")]
 public class VagasController : ControllerBase
 {
     private readonly IVagaService _service;
@@ -30,27 +31,43 @@ public class VagasController : ControllerBase
 
     }
 
+    [HttpGet("{id}")]
+    public IActionResult GetPorId(int id)
+    {
+        var vaga = _service.PegarPorId(id);
+
+        if (vaga == null)
+            return BadRequest();
+
+        return Ok(vaga);
+    }
 
     [HttpPost("")]
     public IActionResult Post(Vaga vaga)
     {
         if (vaga == null)
             return BadRequest();
-
+            
         _service.Cadastrar(vaga);
 
         return Ok(vaga);
     }
 
     [HttpPut("")]
-    public IActionResult Put()
+    public IActionResult Put(Vaga vaga)
     {
-        return Ok();
+        if (vaga == null)
+            return BadRequest();
+
+        var vagaEdit = _service.Editar(vaga);
+
+        return Ok(vagaEdit);
     }
 
     [HttpDelete("")]
-    public IActionResult Delete()
+    public IActionResult Delete(int id)
     {
+        _service.Deletar(id);
         return Ok();
     }
 

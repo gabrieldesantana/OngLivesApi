@@ -1,16 +1,20 @@
 using Microsoft.AspNetCore.Mvc;
 using ONGLIVES.API.Entidades;
+using ONGLIVES.API.Persistence.Context;
 using ONGLIVESAPI.Interfaces;
 
 namespace ONGLIVES.API.Controllers;
 
 [ApiController]
-[ApiVersion("1.0")]
-[Route("api/v{version:apiVersion}/[controller]")]
+// [ApiVersion("1.0")]
+// [Route("api/v{version:apiVersion}/[controller]")]
+[Route("api/[controller]")]
+
+//public class OngController : ControllerBase
 public class OngsController : ControllerBase
 {
     private readonly IOngService _service;
-    public OngsController(IOngService service)
+    public OngsController(OngService service)
     {
         _service = service;
     }
@@ -18,32 +22,54 @@ public class OngsController : ControllerBase
     [HttpGet("")]
     public IActionResult Get()
     {
-        Ong ong = new Ong();
-        ong.Nome = "Diego Enterprise";
-        
+        var ong = _service.PegarTodos();
+
         if (ong == null)
         {
-            return BadRequest();
+            return NotFound();
         }
+
+        return Ok(ong);
+
+    }
+
+    [HttpGet("{id}")]
+    public IActionResult GetPorId(int id)
+    {
+        var ong = _service.PegarPorId(id);
+
+        if (ong == null)
+            return BadRequest();
 
         return Ok(ong);
     }
 
     [HttpPost("")]
-    public IActionResult Post()
+    public IActionResult Post(Ong ong)
     {
-        return Ok();
+        if (ong == null)
+            return BadRequest();
+
+        _service.Cadastrar(ong);
+
+        return Ok(ong);
     }
 
     [HttpPut("")]
-    public IActionResult Put()
+    public IActionResult Put(Ong ong)
     {
-        return Ok();
+        if (ong == null)
+            return BadRequest();
+
+        var ongEdit = _service.Editar(ong);
+
+        return Ok(ongEdit);
     }
 
-    [HttpDelete("")]
-    public IActionResult Delete()
+    [HttpDelete("{id}")]
+    public IActionResult Delete(int id)
     {
+        _service.Deletar(id);
         return Ok();
     }
 

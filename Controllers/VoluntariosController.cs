@@ -6,8 +6,9 @@ using ONGLIVESAPI.Interfaces;
 namespace ONGLIVES.API.Controllers;
 
 [ApiController]
-[ApiVersion("1.0")]
-[Route("api/v{version:apiVersion}/[controller]")]
+// [ApiVersion("1.0")]
+// [Route("api/v{version:apiVersion}/[controller]")]
+[Route("api/[controller]")]
 public class VoluntariosController : ControllerBase
 {
     private readonly IVoluntarioService _service;
@@ -16,58 +17,71 @@ public class VoluntariosController : ControllerBase
         _service = service;
     }
 
+    [ProducesResponseType((200), Type = typeof(List<Voluntario>))]
+    [ProducesResponseType((404))]
     [HttpGet("")]
-    public IActionResult Get()
+    public async Task<IActionResult> GetTodos()
     {
-        var voluntarios = _service.PegarTodos();
+        var voluntarios = await _service.PegarTodos();
 
         if (voluntarios == null)
-        {
-            return NotFound();
-        }
+            return NotFound("Nenhum registro encontrado no sistema");
 
         return Ok(voluntarios);
-
     }
 
+    [ProducesResponseType((200), Type = typeof(Voluntario))]
+    [ProducesResponseType((404))]
     [HttpGet("{id}")]
-    public IActionResult GetPorId(int id) 
+    public async Task<IActionResult> GetPorId(int id) 
     {
-        var voluntario = _service.PegarPorId(id);
+        var voluntario = await _service.PegarPorId(id);
 
         if (voluntario == null) 
-            return BadRequest();
+            return NotFound();
 
         return Ok(voluntario);
     }
 
+    [ProducesResponseType((201), Type = typeof(Voluntario))]
+    [ProducesResponseType((400))]
+    [ProducesResponseType((404))]
     [HttpPost("")]
-    public IActionResult Post(Voluntario voluntario)
+    public async Task<IActionResult> Post(Voluntario voluntario)
     {
         if (voluntario == null)
             return BadRequest();
         
-        _service.Cadastrar(voluntario);
+        await _service.Cadastrar(voluntario);
 
-        return Ok(voluntario);
+        return CreatedAtAction("GetPorId", new {Id = voluntario.Id} , voluntario);
     }
 
+    [ProducesResponseType((200), Type = typeof(Voluntario))]
+    [ProducesResponseType((404))]
     [HttpPut("")]
-    public IActionResult Put(Voluntario voluntario)
+    public async Task<IActionResult> Put(EditVoluntarioModel voluntario)
     {
         if (voluntario == null)
-            return BadRequest();
+            return NotFound();
 
-        var voluntarioEdit = _service.Editar(voluntario);
+        var voluntarioEdit = await _service.Editar(voluntario);
+
+        if (voluntarioEdit == null)
+            return BadRequest();
 
         return Ok(voluntarioEdit);
     }
 
+    [ProducesResponseType((200))]
+    [ProducesResponseType((400))]
     [HttpDelete("{id}")]
-    public IActionResult Delete(int id)
+    public async Task<IActionResult> Delete(int id)
     {
-        _service.Deletar(id);
-        return Ok();
+        var voluntario = await _service.Deletar(id);
+        if (voluntario == false)
+            return BadRequest();
+        return Ok(voluntario);
     }
 
 }
