@@ -36,6 +36,7 @@ public class VoluntarioRepository : IVoluntarioRepository
         voluntarioEdit.HorasVoluntaria = voluntario.HorasVoluntaria;
         voluntarioEdit.QuantidadeExperiencias = voluntario.QuantidadeExperiencias;
         voluntarioEdit.Endereco = voluntario.Endereco;
+        voluntarioEdit.Avaliacao = voluntario.Avaliacao;
         return voluntarioEdit;
 
     }
