@@ -9,19 +9,18 @@ public class OngRepository : IOngRepository
     {
         _context = context;
     }
-    public Ong Cadastrar(Ong ong)
+    public async Task<Ong> Cadastrar(Voluntario voluntario)
     {
         _context.Ongs.Add(ong);
         return ong;
     }
 
-    public void Deletar(int id)
+    public async Task Deletar(Ong ong)
     {
-        var ong = PegarPorId(id);
         _context.Ongs.Remove(ong);
     }
 
-    public Ong Editar(Ong ongs)
+    public async Task<Ong> Editar(EditOngModel ong)
     {
         var ongsEdit = PegarPorId(ongs.Id);
 
@@ -35,12 +34,12 @@ public class OngRepository : IOngRepository
 
     }
 
-    public Ong PegarPorId(int id)
+    public async Task<Ong> PegarPorId(int id)
     {
         return _context.Ongs.FirstOrDefault(x => x.Id == id);
     }
 
-    public List<Ong> PegarTodos()
+    public async Task<List<Ong>> PegarTodos()
     {
         return _context.Ongs.ToList();
     }

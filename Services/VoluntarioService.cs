@@ -19,7 +19,6 @@ public class VoluntarioService : IVoluntarioService
             throw new Exception("VoluntarioId já existe");
 
         _repository.Cadastrar(voluntario);
-
         return voluntario;
     }
 
@@ -41,10 +40,10 @@ public class VoluntarioService : IVoluntarioService
     }
 
     public async Task<Voluntario> PegarPorId(int id)
-    {   
+    {
         var voluntario = await _repository.PegarPorId(id);
 
-        if (voluntario == null) 
+        if (voluntario == null)
             return null;
 
         return await _repository.PegarPorId(id);
@@ -56,7 +55,7 @@ public class VoluntarioService : IVoluntarioService
 
         if (voluntario == null)
             return false;
-            //return Boolean
+        //return Boolean
         await _repository.Deletar(voluntario);
         return true;
     }
