@@ -1,5 +1,6 @@
 using ONGLIVES.API.Entidades;
 
+//public interface IVoluntarioRepository : IGenericRepository<Voluntario>
 public interface IVoluntarioRepository 
 {
     public Task<List<Voluntario>> PegarTodos();

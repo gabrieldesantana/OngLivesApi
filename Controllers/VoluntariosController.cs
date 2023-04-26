@@ -57,7 +57,7 @@ public class VoluntariosController : ControllerBase
         return CreatedAtAction("GetPorId", new {Id = voluntario.Id} , voluntario);
     }
 
-    [ProducesResponseType((200), Type = typeof(Voluntario))]
+    [ProducesResponseType((200), Type = typeof(EditVoluntarioModel))]
     [ProducesResponseType((404))]
     [HttpPut("")]
     public async Task<IActionResult> Put(EditVoluntarioModel voluntario)
