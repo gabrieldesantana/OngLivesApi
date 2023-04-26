@@ -17,58 +17,71 @@ public class VagasController : ControllerBase
         _service = service;
     }
 
+    [ProducesResponseType((200), Type= typeof(List<Vaga>))]
+    [ProducesResponseType((404))]
     [HttpGet("")]
-    public IActionResult Get()
+    public async Task<IActionResult> GetTodos()
     {
-        var vagas = _service.PegarTodos();
+        var vagas = await _service.PegarTodos();
 
         if (vagas == null)
-        {
-            return NotFound();
-        }
+            return NotFound("Nenhum resgistro encontrado no sistema");
 
         return Ok(vagas);
-
     }
 
+    [ProducesResponseType((200), Type= typeof(Vaga))]
+    [ProducesResponseType((404))]
     [HttpGet("{id}")]
-    public IActionResult GetPorId(int id)
+    public async Task<IActionResult> GetPorId(int id)
     {
-        var vaga = _service.PegarPorId(id);
+        var vaga = await _service.PegarPorId(id);
 
         if (vaga == null)
-            return BadRequest();
+            return NotFound();
 
         return Ok(vaga);
     }
 
+    [ProducesResponseType((201), Type= typeof(Vaga))]
+    [ProducesResponseType((400))]
+    [ProducesResponseType((404))]
     [HttpPost("")]
-    public IActionResult Post(Vaga vaga)
+    public async Task<IActionResult> Post(Vaga vaga)
     {
         if (vaga == null)
             return BadRequest();
             
-        _service.Cadastrar(vaga);
+        await _service.Cadastrar(vaga);
 
-        return Ok(vaga);
+        return CreatedAtAction("GetPorId", new {Id = vaga.Id}, vaga);
     }
 
+    [ProducesResponseType((200), Type= typeof(Vaga))]
+    [ProducesResponseType((404))]
     [HttpPut("")]
-    public IActionResult Put(Vaga vaga)
+    public async Task<IActionResult> Put(EditVagaModel vaga)
     {
         if (vaga == null)
+            return NotFound();
+
+        var vagaEdit = await _service.Editar(vaga);
+
+        if (vagaEdit == null)
             return BadRequest();
-
-        var vagaEdit = _service.Editar(vaga);
-
+        
         return Ok(vagaEdit);
     }
 
-    [HttpDelete("")]
-    public IActionResult Delete(int id)
+    [ProducesResponseType((200))]
+    [ProducesResponseType((400))]
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> Delete(int id)
     {
-        _service.Deletar(id);
-        return Ok();
+        var vaga = await _service.Deletar(id);
+        if (vaga == false)
+            return BadRequest();
+        return Ok(vaga);
     }
 
 }

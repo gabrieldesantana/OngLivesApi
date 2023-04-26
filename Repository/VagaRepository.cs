@@ -9,25 +9,25 @@ public class VagaRepository : IVagaRepository
     {
         _context = context;
     }
-    public Vaga Cadastrar(Vaga vaga)
+    public async Task<Vaga> Cadastrar(Vaga vaga)
     {
         _context.Vagas.Add(vaga);
         return vaga;
     }
 
-    public void Deletar(int id)
+    public async Task Deletar(Vaga vaga)
     {
-        var vaga = PegarPorId(id);
         _context.Vagas.Remove(vaga);
     }
 
-    public Vaga Editar(Vaga vaga)
-    {
-        var vagaEdit = PegarPorId(vaga.Id);
 
-        vagaEdit.VoluntarioId = vaga.VoluntarioId;
+    public async Task<Vaga> Editar(EditVagaModel vaga)
+    {
+        var vagaEdit = await PegarPorId(vaga.Id);
+
+        //vagaEdit.VoluntarioId = vaga.VoluntarioId;
         // vagaEdit.Voluntario = vaga.Voluntario;
-        vagaEdit.OngId = vaga.OngId;
+        //vagaEdit.OngId = vaga.OngId;
         // vagaEdit.Ong = vaga.Ong;
         vagaEdit.Tipo = vaga.Tipo;
         vagaEdit.Turno = vaga.Turno;
@@ -39,17 +39,13 @@ public class VagaRepository : IVagaRepository
 
     }
 
-    public Vaga PegarPorId(int id)
+    public async Task<Vaga> PegarPorId(int id)
     {
-        var vaga = _context.Vagas.FirstOrDefault(x => x.Id == id);
-        if (vaga == null)
-        {
-            return new Vaga();
-        }
-        return vaga;        
+        return _context.Vagas.FirstOrDefault(x => x.Id == id);
+               
     }
 
-    public List<Vaga> PegarTodos()
+    public async Task<List<Vaga>> PegarTodos()
     {
         return _context.Vagas.ToList();
     }

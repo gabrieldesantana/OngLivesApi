@@ -2,9 +2,9 @@ using ONGLIVES.API.Entidades;
 
 public interface IVagaRepository 
 {
-    public List<Vaga> PegarTodos();
-    public Vaga Cadastrar(Vaga vaga);
-    public Vaga PegarPorId(int id);
-    public Vaga Editar(Vaga vaga);
-    public void Deletar(int id);
+    public Task<List<Vaga>> PegarTodos();
+    public Task<Vaga> PegarPorId(int id);
+    public Task<Vaga> Cadastrar(Vaga vaga);
+    public Task<Vaga> Editar(EditVagaModel vaga);
+    public Task Deletar(Vaga vaga);
 }
