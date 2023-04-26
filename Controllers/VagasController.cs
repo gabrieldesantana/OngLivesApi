@@ -51,7 +51,7 @@ public class VagasController : ControllerBase
     {
         if (vaga == null)
             return BadRequest();
-        
+            
         await _service.Cadastrar(vaga);
 
         return CreatedAtAction("GetPorId", new {Id = vaga.Id}, vaga);
