@@ -39,27 +39,27 @@ namespace ONGLIVES.API.Repository
             }
             return entity;
         }
-        public T Editar(T entity)
-        {
-            if (!Exists(entity.Id))
-                return null;
+        // public T Editar(T entity)
+        // {
+        //     if (!Exists(entity.Id))
+        //         return null;
 
-            var result = PegarPorId(entity.Id);
-            if (result != null)
-            {
-                try
-                {
-                    //_context.Entry(result).CurrentValues.SetValues(entity);
-                    //_context.SaveChanges();
-                }
-                catch (Exception)
-                {
+        //     var result = PegarPorId(entity.Id);
+        //     if (result != null)
+        //     {
+        //         try
+        //         {
+        //             //_context.Entry(result).CurrentValues.SetValues(entity);
+        //             //_context.SaveChanges();
+        //         }
+        //         catch (Exception)
+        //         {
 
-                    throw;
-                }
-            }
-            return entity;
-        }
+        //             throw;
+        //         }
+        //     }
+        //     return entity;
+        // }
 
         public void Deletar(int id)
         {
@@ -81,9 +81,14 @@ namespace ONGLIVES.API.Repository
             throw new NotImplementedException();
         }
 
-        public bool Exists(long id)
+        public T Editar(T entity)
         {
-            //return _dbSet.Any(x => x.Id.Equals(id));
+            throw new NotImplementedException();
         }
+
+        // public bool Exists(long id)
+        // {
+        //     return _dbSet.Any(x => x.Id.Equals(id));
+        // }
     }
 }

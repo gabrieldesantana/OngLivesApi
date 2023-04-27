@@ -4,9 +4,9 @@ namespace ONGLIVESAPI.Interfaces;
 
 public interface IOngService
 {
-    public List<Ong> PegarTodos();
-    public Ong Cadastrar(Ong ong);
-    public Ong Editar(Ong ong);
-    public void Deletar(int id);
-    public Ong PegarPorId(int id);
+    public Task<List<Ong>> PegarTodos();
+    public Task<Ong> Cadastrar(Ong ong);
+    public Task<Ong> Editar(EditOngModel ong);
+    public Task<bool> Deletar(int id);
+    public Task<Ong> PegarPorId(int id);
 }

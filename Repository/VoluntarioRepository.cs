@@ -52,6 +52,31 @@ public class VoluntarioRepository : IVoluntarioRepository
         return  _context.Voluntarios.FirstOrDefault(x => x.Id == id);
     }
 
+    public async Task<Voluntario> PegarPorNome(string nome, string sobrenome)
+    {
+        if (!string.IsNullOrWhiteSpace(nome) && !string.IsNullOrWhiteSpace(sobrenome))
+        {
+            //return _context.Voluntarios.Where( x => x.Nome.Contains(nome) && x.Sobrenome.Contains(sobrenome)).ToList();
+            return _context.Voluntarios.FirstOrDefault(
+                 x => x.Nome.Contains(nome) && x.Sobrenome.Contains(sobrenome)
+                 );
+        }   
+        else if (!string.IsNullOrWhiteSpace(nome) && string.IsNullOrWhiteSpace(sobrenome)) 
+        {
+            return _context.Voluntarios.FirstOrDefault(
+                 x => x.Nome.Contains(nome)
+                 );
+        }
+        else if (string.IsNullOrWhiteSpace(nome) && !string.IsNullOrWhiteSpace(sobrenome)) 
+        {
+            return _context.Voluntarios.FirstOrDefault(
+                 x => x.Nome.Contains(sobrenome)
+                 );
+        }
+
+        return null;
+    }
+
     public async Task<List<Voluntario>> PegarTodos()
     {
         return _context.Voluntarios.ToList();

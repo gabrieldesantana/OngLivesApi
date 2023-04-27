@@ -8,11 +8,11 @@ public class OngService : IOngService
     {
         _repository = repository;
     }
-    public Ong Cadastrar(Ong ong)
+    public async Task<Ong> Cadastrar(Ong ong)
     {
-        var ongs = _repository.PegarTodos();
+        var ongs = await _repository.PegarTodos();
         //validacoes
-        if (ongs == null)
+        if (ong == null)
             throw new Exception("Ong sem informações");
 
         if (ongs.Exists(x => x.Id == ong.Id))
@@ -29,7 +29,7 @@ public class OngService : IOngService
         if (ongEdit == null)
             return null;
 
-        ongEdit = await _repository.Editar(voluntario);
+        ongEdit = await _repository.Editar(ong);
 
         return ongEdit;
     }
@@ -39,7 +39,7 @@ public class OngService : IOngService
         return await _repository.PegarTodos();
     }
 
-    public async Task<Voluntario> PegarPorId(int id)
+    public async Task<Ong> PegarPorId(int id)
     {
         var ong = await _repository.PegarPorId(id);
 

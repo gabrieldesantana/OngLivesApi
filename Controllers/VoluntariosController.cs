@@ -47,10 +47,24 @@ public class VoluntariosController : ControllerBase
     [ProducesResponseType((400))]
     [ProducesResponseType((404))]
     [HttpPost("")]
-    public async Task<IActionResult> Post(Voluntario voluntario)
+    public async Task<IActionResult> Post(InputVoluntarioModel inputVoluntarioModel)
     {
-        if (voluntario == null)
+        if (inputVoluntarioModel == null)
             return BadRequest();
+
+        var voluntario = new Voluntario 
+        {
+        Id = inputVoluntarioModel.Id,
+        Escolaridade = inputVoluntarioModel.Escolaridade,
+        Genero = inputVoluntarioModel.Genero,
+        Email = inputVoluntarioModel.Email,
+        Telefone = inputVoluntarioModel.Telefone,
+        Habilidade = inputVoluntarioModel.Habilidade,
+        Avaliacao = inputVoluntarioModel.Avaliacao,
+        HorasVoluntaria = inputVoluntarioModel.HorasVoluntaria,
+        QuantidadeExperiencias = inputVoluntarioModel.QuantidadeExperiencias,
+        Endereco = inputVoluntarioModel.Endereco,
+        };
         
         await _service.Cadastrar(voluntario);
 

@@ -7,6 +7,8 @@ public class EditVagaModel
         //vagaEdit.OngId = vaga.OngId;
         // vagaEdit.Ong = vaga.Ong;
         //vagaEdit.Tipo = vaga.Tipo;
+
+        
         public int Id {get; set;}
         public string? Tipo {get; set;}
         //vagaEdit.Turno = vaga.Turno;

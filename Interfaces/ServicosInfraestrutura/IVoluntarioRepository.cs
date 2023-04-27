@@ -5,6 +5,7 @@ public interface IVoluntarioRepository
 {
     public Task<List<Voluntario>> PegarTodos();
     public Task<Voluntario> PegarPorId(int id);
+    public Task<Voluntario> PegarPorNome(string nome, string sobrenome);
     public Task<Voluntario> Cadastrar(Voluntario voluntario);
     public Task<Voluntario> Editar (EditVoluntarioModel voluntario);
     public Task Deletar(Voluntario voluntario);

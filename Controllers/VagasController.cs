@@ -47,10 +47,22 @@ public class VagasController : ControllerBase
     [ProducesResponseType((400))]
     [ProducesResponseType((404))]
     [HttpPost("")]
-    public async Task<IActionResult> Post(Vaga vaga)
+    public async Task<IActionResult> Post(InputVagaModel inputVagaModel)
     {
-        if (vaga == null)
+        if (inputVagaModel == null)
             return BadRequest();
+
+        var vaga = new Vaga 
+        {
+        VoluntarioId = inputVagaModel.VoluntarioId,
+        OngId = inputVagaModel.OngId,
+        Tipo = inputVagaModel.Tipo,
+        Turno = inputVagaModel.Turno,
+        Descricao = inputVagaModel.Descricao,
+        Habilidade = inputVagaModel.Habilidade,
+        DataInicio = inputVagaModel.DataInicio,
+        DataFim = inputVagaModel.DataFim,
+        };
             
         await _service.Cadastrar(vaga);
 

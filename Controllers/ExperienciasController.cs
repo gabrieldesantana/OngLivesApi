@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using ONGLIVES.API.Entidades;
 using ONGLIVES.API.Persistence.Context;
-using ONGLIVES.API.VO;
 using ONGLIVESAPI.Interfaces;
 
 namespace ONGLIVES.API.Controllers;
@@ -18,60 +17,84 @@ public class ExperienciasController : ControllerBase
         _service = service;
     }
 
+    [ProducesResponseType((200), Type = typeof(List<Experiencia>))]
+    [ProducesResponseType((404))]
     [HttpGet("")]
-    public IActionResult Get()
+    public async Task<IActionResult> GetTodos()
     {
-        var experiencias = _service.PegarTodos();
+        var experiencias = await _service.PegarTodos();
 
         if (experiencias == null)
-        {
-            return NotFound();
-        }
+            return NotFound("Nenhum registro encontrado no sistema");
 
         return Ok(experiencias);
-
     }
 
-
+    [ProducesResponseType((200), Type = typeof(Experiencia))]
+    [ProducesResponseType((404))]
     [HttpGet("{id}")]
-    public IActionResult GetPorId(int id)
+    public async Task<IActionResult> GetPorId(int id) 
     {
-        var experiencias = _service.PegarPorId(id);
+        var experiencia = await _service.PegarPorId(id);
 
-        if (experiencias == null)
-            return BadRequest();
-
-        return Ok(experiencias);
-    }
-
-
-    [HttpPost("")]
-    public IActionResult Post(Experiencia experiencia)
-    {
-        if (experiencia == null)
-            return BadRequest();
-
-        _service.Cadastrar(experiencia);
+        if (experiencia == null) 
+            return NotFound();
 
         return Ok(experiencia);
     }
 
+    [ProducesResponseType((201), Type = typeof(Experiencia))]
+    [ProducesResponseType((400))]
+    [ProducesResponseType((404))]
+    [HttpPost("")]
+    public async Task<IActionResult> Post(InputExperienciaModel inputExperienciaModel)
+    {
+        if (inputExperienciaModel == null)
+            return BadRequest();
+        
+        var experiencia = new Experiencia 
+        {
+        NomeVoluntario = inputExperienciaModel.NomeVoluntario,
+        SobrenomeVoluntario = inputExperienciaModel.SobrenomeVoluntario,
+        NomeOng = inputExperienciaModel.NomeOng,
+        ProjetoEnvolvido = inputExperienciaModel.ProjetoEnvolvido,
+        Opiniao = inputExperienciaModel.Opiniao,
+        DataPostagem = DateTime.Now,
+        DataExperienciaInicio = inputExperienciaModel.DataExperienciaInicio,
+        DataExperienciaFim = inputExperienciaModel.DataExperienciaFim
+        };
+
+        experiencia = await _service.Cadastrar(experiencia);
+
+        return CreatedAtAction("GetPorId", new {Id = experiencia.Id} , experiencia);
+    }
+
+
+    [ProducesResponseType((200), Type = typeof(EditExperienciaModel))]
+    [ProducesResponseType((404))]
     [HttpPut("")]
-    public IActionResult Put(Experiencia experiencia)
+    public async Task<IActionResult> Put(EditExperienciaModel experiencia)
     {
         if (experiencia == null)
-            return BadRequest();
+            return NotFound();
 
-        var experienciaEdit = _service.Editar(experiencia);
+        var experienciaEdit = await _service.Editar(experiencia);
+
+        if (experienciaEdit == null)
+            return BadRequest();
 
         return Ok(experienciaEdit);
     }
 
+    [ProducesResponseType((200))]
+    [ProducesResponseType((400))]
     [HttpDelete("{id}")]
-    public IActionResult Delete(int id)
+    public async Task<IActionResult> Delete(int id)
     {
-        _service.Deletar(id);
-        return Ok();
+        var experiencia = await _service.Deletar(id);
+        if (experiencia == false)
+            return BadRequest();
+        return Ok(experiencia);
     }
 
 }

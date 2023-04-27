@@ -4,42 +4,65 @@ using ONGLIVESAPI.Interfaces;
 public class ExperienciaService : IExperienciaService
 {
     private readonly IExperienciaRepository _repository;
-    public ExperienciaService(IExperienciaRepository repository)
+    private readonly IVoluntarioRepository _voluntarioRepository;
+    private readonly IOngRepository _ongRepository;
+    public ExperienciaService(IExperienciaRepository repository, IVoluntarioRepository voluntarioRepository, IOngRepository ongRepository)
     {
         _repository = repository;
+        _voluntarioRepository = voluntarioRepository;
+        _ongRepository = ongRepository;
     }
-    public Experiencia Cadastrar(Experiencia voluntario)
+
+    public async Task<Experiencia> Cadastrar(Experiencia experiencia)
     {
-        var voluntarios = _repository.PegarTodos();
+        var experiencias = await _repository.PegarTodos();
         //validacoes
-        if (voluntario == null)
+        if (experiencia == null)
             throw new Exception("Experiencia sem informacoes");
 
-        if (voluntarios.Exists(x => x.Id == voluntario.Id))
+        if (experiencias.Exists(x => x.Id == experiencia.Id))
             throw new Exception("ExperienciaId ja existe");
 
-        _repository.Cadastrar(voluntario);
-        return voluntario;
+        var voluntario = await _voluntarioRepository.PegarPorNome(experiencia.NomeVoluntario, experiencia.SobrenomeVoluntario);
+        var ong = await _ongRepository.PegarPorId(experiencia.IdOng);
+        
+        experiencia.IdOng = voluntario.Id;
+        experiencia.IdVoluntario = voluntario.Id;
+
+        _repository.Cadastrar(experiencia);
+        return experiencia;
     }
 
-    public void Deletar(int id)
+    public async Task<bool> Deletar(int id)
     {
-        _repository.Deletar(id);
+         var experiencia = await _repository.PegarPorId(id);
+
+        if (experiencia == null)
+            return false;
+        //return Boolean
+        await _repository.Deletar(experiencia);
+        return true;
     }
 
-    public Experiencia Editar(Experiencia experiencia)
+    public async Task<Experiencia> Editar(EditExperienciaModel experiencia)
     {
-        var experienciaEdit = _repository.Editar(experiencia);
+        var experienciaEdit = await _repository.PegarPorId(experiencia.Id);
+        
+        if (experienciaEdit == null)
+            return null;
+
+        experienciaEdit = await _repository.Editar(experiencia);
+
         return experienciaEdit;
     }
 
-    public Experiencia PegarPorId(int id)
+    public async Task<Experiencia> PegarPorId(int id)
     {
-        return _repository.PegarPorId(id);
+        return await _repository.PegarPorId(id);
     }
 
-    public List<Experiencia> PegarTodos()
+    public async Task<List<Experiencia>> PegarTodos()
     {
-        return _repository.PegarTodos();
+        return await _repository.PegarTodos();
     }
 }
