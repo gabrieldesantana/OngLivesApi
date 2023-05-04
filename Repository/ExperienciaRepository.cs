@@ -9,40 +9,36 @@ public class ExperienciaRepository : IExperienciaRepository
     {
         _context = context;
     }
-    public Experiencia Cadastrar(Experiencia voluntario)
+    public async Task<Experiencia> Cadastrar(Experiencia voluntario)
     {
         _context.Experiencias.Add(voluntario);
         return voluntario;
     }
 
-    public void Deletar(int id)
+    public async Task Deletar(Experiencia experiencia)
     {
-        var experiencia = PegarPorId(id);
         _context.Experiencias.Remove(experiencia);
     }
 
-    public Experiencia Editar(Experiencia experiencia)
+    public async Task<Experiencia> Editar(EditExperienciaModel experiencia)
     {
-        var experienciaEdit = PegarPorId(experiencia.Id);
+        var experienciaEdit = await PegarPorId(experiencia.Id);
 
         experienciaEdit.IdVoluntario = experiencia.IdVoluntario;
-        experienciaEdit.NomeVoluntario = experiencia.NomeVoluntario;
-        experienciaEdit.IdVoluntario = experiencia.IdVoluntario;
         experienciaEdit.IdOng = experiencia.IdOng;
-        experienciaEdit.NomeOng = experiencia.NomeOng;
         experienciaEdit.ProjetoEnvolvido = experiencia.ProjetoEnvolvido;
         experienciaEdit.Opiniao = experiencia.Opiniao;
-        experienciaEdit.Data = experiencia.Data;
+
         return experienciaEdit;
 
     }
 
-    public Experiencia PegarPorId(int id)
+    public async Task<Experiencia> PegarPorId(int id)
     {
         return _context.Experiencias.FirstOrDefault(x => x.Id == id);
     }
 
-    public List<Experiencia> PegarTodos()
+    public async Task<List<Experiencia>> PegarTodos()
     {
         return _context.Experiencias.ToList();
     }

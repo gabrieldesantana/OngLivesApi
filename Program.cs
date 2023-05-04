@@ -9,6 +9,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSingleton<OngLivesContext>();
 builder.Services.AddRegisterServices();
 
+builder.Services.AddScoped<IOngService,OngService>();
+
 
 // builder.Services.AddApiVersioning(x => 
 // {

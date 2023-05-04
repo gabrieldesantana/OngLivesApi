@@ -8,9 +8,9 @@ public class OngService : IOngService
     {
         _repository = repository;
     }
-    public Ong Cadastrar(Ong ong)
+    public async Task<Ong> Cadastrar(Ong ong)
     {
-        var ongs = _repository.PegarTodos();
+        var ongs = await _repository.PegarTodos();
         //validacoes
         if (ong == null)
             throw new Exception("Ong sem informações");
@@ -22,24 +22,41 @@ public class OngService : IOngService
         return ong;
     }
 
-    public void Deletar(int id)
+    public async Task<Ong> Editar(EditOngModel ong)
     {
-        _repository.Deletar(id);
-    }
+        var ongEdit = await _repository.PegarPorId(ong.Id);
 
-    public Ong Editar(Ong ong)
-    {
-        var ongEdit = _repository.Editar(ong);
+        if (ongEdit == null)
+            return null;
+
+        ongEdit = await _repository.Editar(ong);
+
         return ongEdit;
     }
 
-    public List<Ong> PegarTodos()
+    public async Task<List<Ong>> PegarTodos()
     {
-        return _repository.PegarTodos();
+        return await _repository.PegarTodos();
     }
 
-    public Ong PegarPorId(int id)
+    public async Task<Ong> PegarPorId(int id)
     {
-        return _repository.PegarPorId(id);
+        var ong = await _repository.PegarPorId(id);
+
+        if (ong == null)
+            return null;
+
+        return await _repository.PegarPorId(id);
+    }
+
+    public async Task<bool> Deletar(int id)
+    {
+        var voluntario = await _repository.PegarPorId(id);
+
+        if (voluntario == null)
+            return false;
+        //return Boolean
+        await _repository.Deletar(voluntario);
+        return true;
     }
 }

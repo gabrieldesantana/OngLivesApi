@@ -8,38 +8,56 @@ public class VagaService : IVagaService
     {
         _repository = repository;
     }
-    public Vaga Cadastrar(Vaga vaga)
+    public async Task<Vaga> Cadastrar(Vaga vaga)
     {
-        var vagas = _repository.PegarTodos();
+        var vagas = await _repository.PegarTodos();
         //validacoes
         if (vaga == null)
-            throw new Exception("Vaga sem informacoes");
+            throw new Exception("Vaga sem informações");
 
         if (vagas.Exists(x => x.Id == vaga.Id))
             throw new Exception("VagaId ja existe");
 
         _repository.Cadastrar(vaga);
+
         return vaga;
     }
 
-    public void Deletar(int id)
+    public async Task<Vaga> Editar(EditVagaModel vaga)
     {
-        _repository.Deletar(id);
-    }
+        var vagaEdit = await _repository.PegarPorId(vaga.Id);
+        
+        if (vagaEdit == null)
+            return null;
+        
+        vagaEdit = await _repository.Editar(vaga);
 
-    public Vaga Editar(Vaga vaga)
-    {
-        var vagaEdit = _repository.Editar(vaga);
         return vagaEdit;
     }
 
-    public List<Vaga> PegarTodos()
+    public async Task<List<Vaga>> PegarTodos()
     {
-        return _repository.PegarTodos();
+        return await _repository.PegarTodos();
     }
 
-    public Vaga PegarPorId(int id)
+    public async Task<Vaga> PegarPorId(int id)
     {
-        return _repository.PegarPorId(id);
+        var vaga = await _repository.PegarPorId(id);
+
+        if (vaga == null)
+            return null;
+
+        return await _repository.PegarPorId(id);
+    }
+
+    public async Task<bool> Deletar(int id)
+    {
+        var vaga = await _repository.PegarPorId(id);
+
+        if (vaga == null)
+            return false;
+            //return Boolean
+        await _repository.Deletar(vaga);
+        return true;
     }
 }
