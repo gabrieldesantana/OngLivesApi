@@ -12,7 +12,7 @@ namespace ONGLIVES.API.Controllers;
 public class OngsController : ControllerBase
 {
     private readonly IOngService _service;
-    public OngsController(OngService service)
+    public OngsController(IOngService service)
     {
         _service = service;
     }
