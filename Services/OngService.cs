@@ -12,7 +12,7 @@ public class OngService : IOngService
     {
         var ongs = _repository.PegarTodos();
         //validacoes
-        if (ongs == null)
+        if (ong == null)
             throw new Exception("Ong sem informações");
 
         if (ongs.Exists(x => x.Id == ong.Id))

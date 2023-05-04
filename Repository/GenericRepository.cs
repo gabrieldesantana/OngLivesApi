@@ -7,7 +7,7 @@ namespace ONGLIVES.API.Repository
     public class GenericRepository<T> : IGenericRepository<T> where T : Base
     {
         protected readonly OngLivesContext _context;
-        //internal DbSet<T> _dbSet;
+        //protected readonly DbSet<T> _dbSet;
         public GenericRepository(OngLivesContext context)
         {
             _context = context;
@@ -83,6 +83,7 @@ namespace ONGLIVES.API.Repository
 
         public bool Exists(long id)
         {
+            return true;
             //return _dbSet.Any(x => x.Id.Equals(id));
         }
     }
