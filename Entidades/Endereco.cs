@@ -4,8 +4,7 @@ namespace ONGLIVES.API.Entidades
     {
         // public int EnderecoId { get; set; }
         public string? Cep { get; set; }
-        public string? EnderecoLinhaUm { get; set; }
-        public string? EnderecoLinhaDois{ get; set; }
+        public string? EnderecoLinha { get; set; }
         public int Numero {get; set;}
         public string? Bairro { get; set; }
         public string? Cidade { get; set; }

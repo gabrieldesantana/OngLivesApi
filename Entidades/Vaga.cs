@@ -10,6 +10,7 @@ namespace ONGLIVES.API.Entidades
         public int OngId { get; set; }
         // [JsonIgnore]
         public Ong? Ong { get; private set; }
+        
         public string? Tipo { get; set; }
         public string? Turno { get; set; }
         public string? Descricao { get; set; }

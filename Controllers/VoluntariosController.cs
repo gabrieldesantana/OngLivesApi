@@ -54,7 +54,12 @@ public class VoluntariosController : ControllerBase
 
         var voluntario = new Voluntario 
         {
-        Id = inputVoluntarioModel.Id,
+
+        Nome = inputVoluntarioModel.Nome,
+        Sobrenome = inputVoluntarioModel.Sobrenome,
+        CPF = inputVoluntarioModel.CPF,
+        DataNascimento = inputVoluntarioModel.DataNascimento,
+
         Escolaridade = inputVoluntarioModel.Escolaridade,
         Genero = inputVoluntarioModel.Genero,
         Email = inputVoluntarioModel.Email,
@@ -64,6 +69,8 @@ public class VoluntariosController : ControllerBase
         HorasVoluntaria = inputVoluntarioModel.HorasVoluntaria,
         QuantidadeExperiencias = inputVoluntarioModel.QuantidadeExperiencias,
         Endereco = inputVoluntarioModel.Endereco,
+
+        Id = inputVoluntarioModel.Id
         };
         
         await _service.Cadastrar(voluntario);

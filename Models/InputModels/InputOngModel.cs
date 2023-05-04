@@ -2,6 +2,8 @@ using ONGLIVES.API.Entidades;
 
 public class InputOngModel 
 {
+        public int Id { get; set; } //remover dps
+        
         public string? Nome { get; set; }
         public string? CNPJ { get; set; }
         public string? Telefone { get; set; }

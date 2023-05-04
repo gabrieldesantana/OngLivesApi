@@ -62,7 +62,9 @@ public class OngsController : ControllerBase
         Email = inputOngModel.Email,
         AreaAtuacao = inputOngModel.AreaAtuacao,
         QuantidadeEmpregados = inputOngModel.QuantidadeEmpregados,
-        Endereco = inputOngModel.Endereco
+        Endereco = inputOngModel.Endereco,
+
+        Id = inputOngModel.Id
         };
         
         await _service.Cadastrar(ong);

@@ -9,6 +9,7 @@ namespace ONGLIVES.API.Entidades
         public string? Email { get; set; }
         public string? AreaAtuacao { get; set; }
         public int QuantidadeEmpregados { get; set; }
+        
         public int FinanceiroId { get; set; }
         public OngFinanceiro? Financeiro { get; private set; } //
 

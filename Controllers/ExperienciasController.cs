@@ -61,7 +61,9 @@ public class ExperienciasController : ControllerBase
         Opiniao = inputExperienciaModel.Opiniao,
         DataPostagem = DateTime.Now,
         DataExperienciaInicio = inputExperienciaModel.DataExperienciaInicio,
-        DataExperienciaFim = inputExperienciaModel.DataExperienciaFim
+        DataExperienciaFim = inputExperienciaModel.DataExperienciaFim,
+        
+        Id = inputExperienciaModel.Id
         };
 
         experiencia = await _service.Cadastrar(experiencia);

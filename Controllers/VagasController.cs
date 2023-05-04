@@ -62,6 +62,8 @@ public class VagasController : ControllerBase
         Habilidade = inputVagaModel.Habilidade,
         DataInicio = inputVagaModel.DataInicio,
         DataFim = inputVagaModel.DataFim,
+
+        Id = inputVagaModel.Id
         };
             
         await _service.Cadastrar(vaga);
