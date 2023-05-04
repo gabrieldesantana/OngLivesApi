@@ -24,9 +24,9 @@ public class ExperienciaService : IExperienciaService
             throw new Exception("ExperienciaId ja existe");
 
         var voluntario = await _voluntarioRepository.PegarPorNome(experiencia.NomeVoluntario, experiencia.SobrenomeVoluntario);
-        var ong = await _ongRepository.PegarPorId(experiencia.IdOng);
+        var ong = await _ongRepository.PegarPorNome(experiencia.NomeOng);
         
-        experiencia.IdOng = voluntario.Id;
+        experiencia.IdOng = ong.Id;
         experiencia.IdVoluntario = voluntario.Id;
 
         _repository.Cadastrar(experiencia);
