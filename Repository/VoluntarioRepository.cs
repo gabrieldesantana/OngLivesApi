@@ -1,91 +1,27 @@
+using Microsoft.EntityFrameworkCore;
 using ONGLIVES.API.Entidades;
 using ONGLIVES.API.Persistence.Context;
-
-//public class VoluntarioRepository : GenericRepository<Voluntario>, IVoluntarioRepository
-public class VoluntarioRepository : IVoluntarioRepository
+using ONGLIVES.API.Repository;
+public class VoluntarioRepository : GenericRepository<Voluntario>,  IVoluntarioRepository
 {
-    private readonly OngLivesContext _context;
-
-    public VoluntarioRepository(OngLivesContext context)
+    public VoluntarioRepository(OngLivesContext context, IUnitOfWork unitOfWork)
+        : base (context, unitOfWork)
     {
-        _context = context;
     }
-    //public VoluntarioRepository(OngLivesContext context) 
-    //    : base(context)
-    //{
-    //}
-
-    public async Task<Voluntario> Cadastrar(Voluntario voluntario) 
+    public async Task<Voluntario> PegarPorNome(string nome)
     {
-        _context.Voluntarios.Add(voluntario);
-        return voluntario;
-    }
-
-    public async Task Deletar(Voluntario voluntario)
-    {
-        _context.Voluntarios.Remove(voluntario);
-    }
-
-
-    public async Task<Voluntario> Editar(EditVoluntarioModel voluntario)
-    {
-        var voluntarioEdit = await PegarPorId(voluntario.Id);
-
-        // voluntarioEdit.Nome = voluntario.Nome;
-        // voluntarioEdit.CPF = voluntario.CPF;
-        // voluntarioEdit.DataNascimento = voluntario.DataNascimento;
-        voluntarioEdit.Email = voluntario.Email;
-        voluntarioEdit.Telefone = voluntario.Telefone;
-        voluntarioEdit.Escolaridade = voluntario.Escolaridade;
-        // voluntarioEdit.Genero = voluntario.Genero;
-        voluntarioEdit.Habilidade = voluntario.Habilidade;
-        voluntarioEdit.HorasVoluntaria = voluntario.HorasVoluntaria;
-        voluntarioEdit.QuantidadeExperiencias = voluntario.QuantidadeExperiencias;
-        voluntarioEdit.Endereco = voluntario.Endereco;
-        voluntarioEdit.Avaliacao = voluntario.Avaliacao;
-        return voluntarioEdit;
-
-    }
-
-    public async Task<Voluntario> PegarPorId(int id)
-    {
-        return  _context.Voluntarios.FirstOrDefault(x => x.Id == id);
-    }
-
-    public async Task<Voluntario> PegarPorNome(string nome, string sobrenome)
-    {
-        if (!string.IsNullOrWhiteSpace(nome) && !string.IsNullOrWhiteSpace(sobrenome))
+        if (!string.IsNullOrWhiteSpace(nome))
         {
-            //return _context.Voluntarios.Where( x => x.Nome.Contains(nome) && x.Sobrenome.Contains(sobrenome)).ToList();
-            return _context.Voluntarios.FirstOrDefault(
-                 x => x.Nome.Contains(nome) && x.Sobrenome.Contains(sobrenome)
-                 );
+            return _context.Voluntarios.FirstOrDefault(x => x.Nome.Contains(nome));
         }   
-        else if (!string.IsNullOrWhiteSpace(nome) && string.IsNullOrWhiteSpace(sobrenome)) 
-        {
-            return _context.Voluntarios.FirstOrDefault(
-                 x => x.Nome.Contains(nome)
-                 );
-        }
-        else if (string.IsNullOrWhiteSpace(nome) && !string.IsNullOrWhiteSpace(sobrenome)) 
-        {
-            return _context.Voluntarios.FirstOrDefault(
-                 x => x.Nome.Contains(sobrenome)
-                 );
-        }
-
         return null;
     }
 
-    public async Task<List<Voluntario>> PegarTodos()
+    public override Voluntario PegarPorId(int id)
     {
-        return _context.Voluntarios.ToList();
+        return _dbSet
+        .Include(x => x.Endereco)
+        .FirstOrDefault(x => x.Id == id);
     }
+
 }
-
-
-
-//public IEnumerable<Customer> GetByName(string name)
-//{
-//    return _entities.Where(c => c.Name.Contains(name)).ToList();
-//}

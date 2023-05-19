@@ -1,4 +1,5 @@
-﻿using ONGLIVES.API.Entidades;
+﻿using Microsoft.EntityFrameworkCore;
+using ONGLIVES.API.Entidades;
 using ONGLIVES.API.Interfaces.ServicosInfraestrutura;
 using ONGLIVES.API.Persistence.Context;
 
@@ -7,61 +8,60 @@ namespace ONGLIVES.API.Repository
     public class GenericRepository<T> : IGenericRepository<T> where T : Base
     {
         protected readonly OngLivesContext _context;
-        //protected readonly DbSet<T> _dbSet;
-        public GenericRepository(OngLivesContext context)
+        protected readonly DbSet<T> _dbSet;
+        protected readonly IUnitOfWork _unitOfWork;
+        public GenericRepository(OngLivesContext context, IUnitOfWork unitOfWork)
         {
             _context = context;
-            //_dbSet = _context.Set<T>();
+            _dbSet = _context.Set<T>();
+            _unitOfWork = unitOfWork;
         }
 
-        public List<T> PegarTodos()
+        public async Task<List<T>> PegarTodos()
         {
-            //return _dbSet.ToList();
-            throw new NotImplementedException();
-        }
-        public T PegarPorId(int id)
-        {
-            //return _dbSet.FirstOrDefault(x => x.Id == id);
-            throw new NotImplementedException();
+            return _dbSet
+            .ToList()
+            .FindAll(x => x.Actived == true);
         }
 
-        public T Cadastrar(T entity)
+        public virtual T PegarPorId(int id)
+        {
+            return _dbSet.FirstOrDefault(x => x.Id == id);
+        }
+
+        public async Task<T> Cadastrar(T entity)
         {
             try
             {
-                //_dbSet.Add(entity);
-                //_context.SaveChanges();
+                await _dbSet.AddAsync(entity);
+                _unitOfWork.Commit();
             }
             catch (Exception ex)
             {
-
-                throw;
+                _unitOfWork.Rollback();
             }
             return entity;
         }
-        // public T Editar(T entity)
-        // {
-        //     if (!Exists(entity.Id))
-        //         return null;
 
-        //     var result = PegarPorId(entity.Id);
-        //     if (result != null)
-        //     {
-        //         try
-        //         {
-        //             //_context.Entry(result).CurrentValues.SetValues(entity);
-        //             //_context.SaveChanges();
-        //         }
-        //         catch (Exception)
-        //         {
+        public async Task<T> Editar(T entity)
+        {
+            var result = PegarPorId(entity.Id);
+            if (result != null)
+            {
+                try
+                {
+                    _context.Entry(result).CurrentValues.SetValues(entity);
+                    _unitOfWork.Commit();
+                }
+                catch (Exception)
+                {
+                    _unitOfWork.Rollback();
+                }
+            }
+            return entity;
+        }
 
-        //             throw;
-        //         }
-        //     }
-        //     return entity;
-        // }
-
-        public void Deletar(int id)
+        public async Task Deletar(int id)
         {
             var retorno = PegarPorId(id);
 
@@ -69,26 +69,20 @@ namespace ONGLIVES.API.Repository
             {
                 try
                 {
-                    //_dbSet.Remove(retorno);
-                    //_context.SaveChanges();
+                    retorno.Actived = false;
+                    _unitOfWork.Commit();
                 }
                 catch (Exception)
                 {
 
-                    throw;
+                    _unitOfWork.Rollback();
                 }
             }
-            throw new NotImplementedException();
         }
 
-        public T Editar(T entity)
+        public bool Exists(int id)
         {
-            throw new NotImplementedException();
+            return _dbSet.Any(x => x.Id.Equals(id));
         }
-
-        // public bool Exists(long id)
-        // {
-        //     return _dbSet.Any(x => x.Id.Equals(id));
-        // }
     }
 }

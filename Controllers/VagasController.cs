@@ -23,10 +23,6 @@ public class VagasController : ControllerBase
     public async Task<IActionResult> GetTodos()
     {
         var vagas = await _service.PegarTodos();
-
-        if (vagas == null)
-            return NotFound("Nenhum resgistro encontrado no sistema");
-
         return Ok(vagas);
     }
 
@@ -51,24 +47,10 @@ public class VagasController : ControllerBase
     {
         if (inputVagaModel == null)
             return BadRequest();
+        
+        await _service.Cadastrar(inputVagaModel);
 
-        var vaga = new Vaga 
-        {
-        VoluntarioId = inputVagaModel.VoluntarioId,
-        OngId = inputVagaModel.OngId,
-        Tipo = inputVagaModel.Tipo,
-        Turno = inputVagaModel.Turno,
-        Descricao = inputVagaModel.Descricao,
-        Habilidade = inputVagaModel.Habilidade,
-        DataInicio = inputVagaModel.DataInicio,
-        DataFim = inputVagaModel.DataFim,
-
-        Id = inputVagaModel.Id
-        };
-            
-        await _service.Cadastrar(vaga);
-
-        return CreatedAtAction("GetPorId", new {Id = vaga.Id}, vaga);
+        return Ok(inputVagaModel);
     }
 
     [ProducesResponseType((200), Type= typeof(Vaga))]
@@ -77,14 +59,14 @@ public class VagasController : ControllerBase
     public async Task<IActionResult> Put(EditVagaModel vaga)
     {
         if (vaga == null)
-            return NotFound();
+            return BadRequest();
 
         var vagaEdit = await _service.Editar(vaga);
 
         if (vagaEdit == null)
             return BadRequest();
         
-        return Ok(vagaEdit);
+        return NoContent();
     }
 
     [ProducesResponseType((200))]
@@ -95,7 +77,8 @@ public class VagasController : ControllerBase
         var vaga = await _service.Deletar(id);
         if (vaga == false)
             return BadRequest();
-        return Ok(vaga);
+            
+        return NoContent();
     }
 
 }

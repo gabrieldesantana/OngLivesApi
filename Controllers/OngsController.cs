@@ -23,10 +23,6 @@ public class OngsController : ControllerBase
     public async Task<IActionResult> GetTodos()
     {
         var ongs = await _service.PegarTodos();
-
-        if (ongs == null)
-            return NotFound("Nenhum registro encontrado no sistema");
-
         return Ok(ongs);
     }
     
@@ -36,7 +32,7 @@ public class OngsController : ControllerBase
     [HttpGet("{id}")]
     public async Task<IActionResult> GetPorId(int id)
     {
-        var ong = await _service.PegarPorId(id);
+        var ong = _service.PegarPorId(id);
 
         if (ong == null)
             return NotFound();
@@ -53,23 +49,72 @@ public class OngsController : ControllerBase
     {
         if (inputOngModel == null)
             return BadRequest();
-
-        var ong = new Ong 
-        {
-        Nome = inputOngModel.Nome,
-        CNPJ = inputOngModel.CNPJ,
-        Telefone = inputOngModel.Telefone,
-        Email = inputOngModel.Email,
-        AreaAtuacao = inputOngModel.AreaAtuacao,
-        QuantidadeEmpregados = inputOngModel.QuantidadeEmpregados,
-        Endereco = inputOngModel.Endereco,
-
-        Id = inputOngModel.Id
-        };
         
-        await _service.Cadastrar(ong);
+        await _service.Cadastrar(inputOngModel);
 
-        return CreatedAtAction("GetPorId", new { Id = ong.Id }, ong);
+        return Ok(inputOngModel);
+    }
+
+    [ProducesResponseType((201), Type = typeof(Vaga))]
+    [ProducesResponseType((400))]
+    [ProducesResponseType((404))]
+    [HttpPost("{id}/vagas")]
+    public async Task<IActionResult> PostVaga(int id, InputVagaOngModel inputVagaOngModel)
+    {
+        var ong = _service.PegarPorId(id);
+
+        if (ong == null)
+            return NotFound();
+
+        var vaga = new Vaga 
+        (
+        inputVagaOngModel.IdVoluntario,
+        ong.Id,
+        inputVagaOngModel.Tipo,
+        inputVagaOngModel.Turno,
+        inputVagaOngModel.Descricao,
+        inputVagaOngModel.Habilidade,
+        inputVagaOngModel.DataInicio,
+        inputVagaOngModel.DataFim
+        );
+
+        if (vaga == null)
+            return BadRequest();
+
+        ong.AdicionarVaga(vaga);
+        await _service.AdicionarVaga(ong);
+
+        return NoContent();
+    }
+
+    [ProducesResponseType((201), Type = typeof(OngFinanceiro))]
+    [ProducesResponseType((400))]
+    [ProducesResponseType((404))]
+    [HttpPost("{id}/financeiros")]
+    public async Task<IActionResult> PostFinanceiro(int id, InputOngFinanceiroModel inputOngFinanceiroModel)
+    {
+        var ong = _service.PegarPorId(id);
+
+        if (ong == null)
+            return NotFound();
+
+        var ongFinanceiro = new OngFinanceiro 
+        (
+        inputOngFinanceiroModel.IdOng,
+        inputOngFinanceiroModel.Tipo,
+        inputOngFinanceiroModel.Data,
+        inputOngFinanceiroModel.Valor,
+        inputOngFinanceiroModel.Origem
+        );
+
+        if (ongFinanceiro == null)
+            return BadRequest();
+
+        ong.AdicionarFinanceiro(ongFinanceiro);
+
+        await _service.AdicionarFinanceiro(ong);
+
+        return NoContent();
     }
 
 
@@ -79,14 +124,14 @@ public class OngsController : ControllerBase
     public async Task<IActionResult> Put(EditOngModel ong)
     {
         if (ong == null)
-            return NotFound();
+            return BadRequest();
 
         var OngEdit = await _service.Editar(ong);
 
         if (OngEdit == null)
             return BadRequest();
 
-        return Ok(OngEdit);
+        return NoContent();
     }
 
 
@@ -98,7 +143,8 @@ public class OngsController : ControllerBase
         var ong = await _service.Deletar(id);
         if (ong == false)
             return BadRequest();
-        return Ok(ong);
+            
+        return NoContent();
     }
 
 }

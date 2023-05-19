@@ -23,10 +23,6 @@ public class ExperienciasController : ControllerBase
     public async Task<IActionResult> GetTodos()
     {
         var experiencias = await _service.PegarTodos();
-
-        if (experiencias == null)
-            return NotFound("Nenhum registro encontrado no sistema");
-
         return Ok(experiencias);
     }
 
@@ -51,41 +47,27 @@ public class ExperienciasController : ControllerBase
     {
         if (inputExperienciaModel == null)
             return BadRequest();
-        
-        var experiencia = new Experiencia 
-        {
-        NomeVoluntario = inputExperienciaModel.NomeVoluntario,
-        SobrenomeVoluntario = inputExperienciaModel.SobrenomeVoluntario,
-        NomeOng = inputExperienciaModel.NomeOng,
-        ProjetoEnvolvido = inputExperienciaModel.ProjetoEnvolvido,
-        Opiniao = inputExperienciaModel.Opiniao,
-        DataPostagem = DateTime.Now,
-        DataExperienciaInicio = inputExperienciaModel.DataExperienciaInicio,
-        DataExperienciaFim = inputExperienciaModel.DataExperienciaFim,
-        
-        Id = inputExperienciaModel.Id
-        };
+            
+        await _service.Cadastrar(inputExperienciaModel);
 
-        experiencia = await _service.Cadastrar(experiencia);
-
-        return CreatedAtAction("GetPorId", new {Id = experiencia.Id} , experiencia);
+        return Ok(inputExperienciaModel);
     }
 
 
     [ProducesResponseType((200), Type = typeof(EditExperienciaModel))]
     [ProducesResponseType((404))]
     [HttpPut("")]
-    public async Task<IActionResult> Put(EditExperienciaModel experiencia)
+    public async Task<IActionResult> Put(EditExperienciaModel editExperienciaModel)
     {
-        if (experiencia == null)
-            return NotFound();
+        if (editExperienciaModel == null)
+            return BadRequest();
 
-        var experienciaEdit = await _service.Editar(experiencia);
+        var experienciaEdit = await _service.Editar(editExperienciaModel);
 
         if (experienciaEdit == null)
             return BadRequest();
 
-        return Ok(experienciaEdit);
+        return NoContent();
     }
 
     [ProducesResponseType((200))]
@@ -96,7 +78,8 @@ public class ExperienciasController : ControllerBase
         var experiencia = await _service.Deletar(id);
         if (experiencia == false)
             return BadRequest();
-        return Ok(experiencia);
+            
+        return NoContent();
     }
 
 }

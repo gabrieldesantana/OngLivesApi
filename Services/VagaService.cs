@@ -8,29 +8,44 @@ public class VagaService : IVagaService
     {
         _repository = repository;
     }
-    public async Task<Vaga> Cadastrar(Vaga vaga)
+    public async Task<Vaga> Cadastrar(InputVagaModel inputVagaModel)
     {
-        var vagas = await _repository.PegarTodos();
-        //validacoes
-        if (vaga == null)
+        if (inputVagaModel == null)
             throw new Exception("Vaga sem informações");
 
-        if (vagas.Exists(x => x.Id == vaga.Id))
-            throw new Exception("VagaId ja existe");
+         var vaga = new Vaga 
+        (
+        inputVagaModel.IdVoluntario,
+        inputVagaModel.IdOng,
+        inputVagaModel.Tipo,
+        inputVagaModel.Turno,
+        inputVagaModel.Descricao,
+        inputVagaModel.Habilidade,
+        inputVagaModel.DataInicio,
+        inputVagaModel.DataFim
+        );
 
-        _repository.Cadastrar(vaga);
+        await _repository.Cadastrar(vaga);
 
         return vaga;
     }
 
-    public async Task<Vaga> Editar(EditVagaModel vaga)
+    public async Task<Vaga> Editar(EditVagaModel editVagaModel)
     {
-        var vagaEdit = await _repository.PegarPorId(vaga.Id);
+        var vagaEdit = _repository.PegarPorId(editVagaModel.Id);
         
         if (vagaEdit == null)
             return null;
+
+        vagaEdit.Id = editVagaModel.Id;
+        vagaEdit.Tipo = editVagaModel.Tipo;
+        vagaEdit.Turno = editVagaModel.Turno;
+        vagaEdit.Descricao = editVagaModel.Descricao;
+        vagaEdit.Habilidade = editVagaModel.Habilidade;
+        vagaEdit.DataInicio = editVagaModel.DataInicio;
+        vagaEdit.DataFim = editVagaModel.DataFim;
         
-        vagaEdit = await _repository.Editar(vaga);
+        vagaEdit = await _repository.Editar(vagaEdit);
 
         return vagaEdit;
     }
@@ -42,22 +57,22 @@ public class VagaService : IVagaService
 
     public async Task<Vaga> PegarPorId(int id)
     {
-        var vaga = await _repository.PegarPorId(id);
+        var vaga = _repository.PegarPorId(id);
 
         if (vaga == null)
             return null;
 
-        return await _repository.PegarPorId(id);
+        return _repository.PegarPorId(id);
     }
 
     public async Task<bool> Deletar(int id)
     {
-        var vaga = await _repository.PegarPorId(id);
+        var vaga = _repository.PegarPorId(id);
 
         if (vaga == null)
             return false;
-            //return Boolean
-        await _repository.Deletar(vaga);
+            
+        await _repository.Deletar(id);
         return true;
     }
 }

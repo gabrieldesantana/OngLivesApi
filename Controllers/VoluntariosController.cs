@@ -23,10 +23,6 @@ public class VoluntariosController : ControllerBase
     public async Task<IActionResult> GetTodos()
     {
         var voluntarios = await _service.PegarTodos();
-
-        if (voluntarios == null)
-            return NotFound("Nenhum registro encontrado no sistema");
-
         return Ok(voluntarios);
     }
 
@@ -52,46 +48,25 @@ public class VoluntariosController : ControllerBase
         if (inputVoluntarioModel == null)
             return BadRequest();
 
-        var voluntario = new Voluntario 
-        {
+        await _service.Cadastrar(inputVoluntarioModel);
 
-        Nome = inputVoluntarioModel.Nome,
-        Sobrenome = inputVoluntarioModel.Sobrenome,
-        CPF = inputVoluntarioModel.CPF,
-        DataNascimento = inputVoluntarioModel.DataNascimento,
-
-        Escolaridade = inputVoluntarioModel.Escolaridade,
-        Genero = inputVoluntarioModel.Genero,
-        Email = inputVoluntarioModel.Email,
-        Telefone = inputVoluntarioModel.Telefone,
-        Habilidade = inputVoluntarioModel.Habilidade,
-        Avaliacao = inputVoluntarioModel.Avaliacao,
-        HorasVoluntaria = inputVoluntarioModel.HorasVoluntaria,
-        QuantidadeExperiencias = inputVoluntarioModel.QuantidadeExperiencias,
-        Endereco = inputVoluntarioModel.Endereco,
-
-        Id = inputVoluntarioModel.Id
-        };
-        
-        await _service.Cadastrar(voluntario);
-
-        return CreatedAtAction("GetPorId", new {Id = voluntario.Id} , voluntario);
+        return Ok(inputVoluntarioModel);
     }
 
     [ProducesResponseType((200), Type = typeof(EditVoluntarioModel))]
     [ProducesResponseType((404))]
     [HttpPut("")]
-    public async Task<IActionResult> Put(EditVoluntarioModel voluntario)
+    public async Task<IActionResult> Put(EditVoluntarioModel editVoluntarioModel)
     {
-        if (voluntario == null)
-            return NotFound();
+        if (editVoluntarioModel == null)
+            return BadRequest();
 
-        var voluntarioEdit = await _service.Editar(voluntario);
+        var voluntarioEdit = await _service.Editar(editVoluntarioModel);
 
         if (voluntarioEdit == null)
             return BadRequest();
 
-        return Ok(voluntarioEdit);
+        return NoContent();
     }
 
     [ProducesResponseType((200))]
@@ -100,9 +75,11 @@ public class VoluntariosController : ControllerBase
     public async Task<IActionResult> Delete(int id)
     {
         var voluntario = await _service.Deletar(id);
+
         if (voluntario == false)
             return BadRequest();
-        return Ok(voluntario);
+            
+        return NoContent();
     }
 
 }

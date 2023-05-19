@@ -1,20 +1,28 @@
+using Microsoft.EntityFrameworkCore;
 using ONGLIVES.API.Entidades;
 namespace ONGLIVES.API.Persistence.Context 
 {
-    public class OngLivesContext
+    public class OngLivesContext : DbContext
     {
-        public OngLivesContext()
+        public OngLivesContext(DbContextOptions<OngLivesContext> options) : base(options)
         {
-            Voluntarios = new List<Voluntario>();
-            Ongs = new List<Ong>();
-            Vagas = new List<Vaga>();
-            Experiencias = new List<Experiencia>();
         }
 
-        public List<Voluntario> Voluntarios { get; set; }
-        public List<Ong> Ongs { get; set; }
-        public List<Vaga> Vagas { get; set; }
-        public List<Experiencia> Experiencias { get; set; }
+        public DbSet<Voluntario> Voluntarios { get; set; }
+        public DbSet<Ong> Ongs { get; set; }
+        public DbSet<Vaga> Vagas { get; set; }
+        public DbSet<Experiencia> Experiencias { get; set; }
+        public DbSet<OngFinanceiro> OngFinanceiros { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer("Server=sv-gsgomes.database.windows.net;DataBase=DB_OngsLives;User Id=gsgomes;Password=Biel0707");
+        }
 
     }
 }

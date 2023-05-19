@@ -1,11 +1,9 @@
 using ONGLIVES.API.Entidades;
+using ONGLIVES.API.Interfaces.ServicosInfraestrutura;
 
-public interface IOngRepository
+public interface IOngRepository : IGenericRepository<Ong>
 {
-    public Task<List<Ong>> PegarTodos();
-    public Task<Ong> Cadastrar(Ong ong);
-    public Task<Ong> PegarPorId(int id);
     public Task<Ong> PegarPorNome(string nome);
-    public Task<Ong> Editar(EditOngModel ong);
-    public Task Deletar(Ong ong);
+    public void AdicionarVaga(Ong ong);
+    public void AdicionarFinanceiro(Ong ong);
 }

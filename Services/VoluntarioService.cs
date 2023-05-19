@@ -8,31 +8,6 @@ public class VoluntarioService : IVoluntarioService
     {
         _repository = repository;
     }
-    public async Task<Voluntario> Cadastrar(Voluntario voluntario)
-    {
-        var voluntarios = await _repository.PegarTodos();
-        //validacoes
-        if (voluntario == null)
-            throw new Exception("Voluntario sem informacoes");
-
-        if (voluntarios.Exists(x => x.Id == voluntario.Id))
-            throw new Exception("VoluntarioId já existe");
-
-        _repository.Cadastrar(voluntario);
-        return voluntario;
-    }
-
-    public async Task<Voluntario> Editar(EditVoluntarioModel voluntario)
-    {
-        var voluntarioEdit = await _repository.PegarPorId(voluntario.Id);
-
-        if (voluntarioEdit == null)
-            return null;
-
-        voluntarioEdit = await _repository.Editar(voluntario);
-
-        return voluntarioEdit;
-    }
 
     public async Task<List<Voluntario>> PegarTodos()
     {
@@ -41,22 +16,71 @@ public class VoluntarioService : IVoluntarioService
 
     public async Task<Voluntario> PegarPorId(int id)
     {
-        var voluntario = await _repository.PegarPorId(id);
+        var voluntario = _repository.PegarPorId(id);
 
         if (voluntario == null)
             return null;
 
-        return await _repository.PegarPorId(id);
+        return _repository.PegarPorId(id);
+    }
+
+    public async Task<Voluntario> Cadastrar(InputVoluntarioModel inputVoluntarioModel)
+    {
+        if (inputVoluntarioModel == null)
+            throw new Exception("Voluntario sem informacoes");
+
+        var voluntario = new Voluntario 
+        (
+        inputVoluntarioModel.Nome,
+        inputVoluntarioModel.CPF,
+        inputVoluntarioModel.DataNascimento,
+        inputVoluntarioModel.Escolaridade,
+        inputVoluntarioModel.Genero,
+        inputVoluntarioModel.Email,
+        inputVoluntarioModel.Telefone,
+        inputVoluntarioModel.Habilidade,
+        inputVoluntarioModel.Avaliacao,
+        inputVoluntarioModel.HorasVoluntaria,
+        inputVoluntarioModel.QuantidadeExperiencias,
+        inputVoluntarioModel.Endereco
+        );
+
+        await _repository.Cadastrar(voluntario);
+        
+        return voluntario;
+    }
+
+    public async Task<Voluntario> Editar(EditVoluntarioModel editVoluntarioModel)
+    {
+        var voluntarioEdit = _repository.PegarPorId(editVoluntarioModel.Id);
+
+        if (voluntarioEdit == null)
+            return null;
+
+        voluntarioEdit.Id = editVoluntarioModel.Id;
+        voluntarioEdit.Escolaridade = editVoluntarioModel.Escolaridade;
+        voluntarioEdit.Email = editVoluntarioModel.Email;
+        voluntarioEdit.Telefone = editVoluntarioModel.Telefone;
+        voluntarioEdit.Habilidade = editVoluntarioModel.Habilidade;
+        voluntarioEdit.Avaliacao = editVoluntarioModel.Avaliacao;
+        voluntarioEdit.HorasVoluntaria = editVoluntarioModel.HorasVoluntaria;
+        voluntarioEdit.QuantidadeExperiencias = editVoluntarioModel.QuantidadeExperiencias;
+        voluntarioEdit.Endereco = editVoluntarioModel.Endereco;
+
+
+        voluntarioEdit = await _repository.Editar(voluntarioEdit);
+
+        return voluntarioEdit;
     }
 
     public async Task<bool> Deletar(int id)
     {
-        var voluntario = await _repository.PegarPorId(id);
+        var voluntario = _repository.PegarPorId(id);
 
         if (voluntario == null)
             return false;
-        //return Boolean
-        await _repository.Deletar(voluntario);
+            
+        await _repository.Deletar(id);
         return true;
     }
 }

@@ -1,12 +1,7 @@
 using ONGLIVES.API.Entidades;
+using ONGLIVES.API.Interfaces.ServicosInfraestrutura;
 
-//public interface IVoluntarioRepository : IGenericRepository<Voluntario>
-public interface IVoluntarioRepository 
+public interface IVoluntarioRepository : IGenericRepository<Voluntario>
 {
-    public Task<List<Voluntario>> PegarTodos();
-    public Task<Voluntario> PegarPorId(int id);
-    public Task<Voluntario> PegarPorNome(string nome, string sobrenome);
-    public Task<Voluntario> Cadastrar(Voluntario voluntario);
-    public Task<Voluntario> Editar (EditVoluntarioModel voluntario);
-    public Task Deletar(Voluntario voluntario);
+    public Task<Voluntario> PegarPorNome(string nome);
 }

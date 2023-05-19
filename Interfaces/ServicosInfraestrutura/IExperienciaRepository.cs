@@ -1,10 +1,6 @@
 using ONGLIVES.API.Entidades;
+using ONGLIVES.API.Interfaces.ServicosInfraestrutura;
 
-public interface IExperienciaRepository 
+public interface IExperienciaRepository : IGenericRepository<Experiencia>
 {
-    public Task<List<Experiencia>> PegarTodos();
-    public Task<Experiencia> Cadastrar(Experiencia experiencia);
-    public Task<Experiencia> PegarPorId(int id);
-    public Task<Experiencia> Editar(EditExperienciaModel experiencia);
-    public Task Deletar(Experiencia experiencia);
 }

@@ -8,55 +8,84 @@ public class OngService : IOngService
     {
         _repository = repository;
     }
-    public async Task<Ong> Cadastrar(Ong ong)
-    {
-        var ongs = await _repository.PegarTodos();
-        //validacoes
-        if (ong == null)
-            throw new Exception("Ong sem informações");
-
-        if (ongs.Exists(x => x.Id == ong.Id))
-            throw new Exception("OngId já existe");
-
-        _repository.Cadastrar(ong);
-        return ong;
-    }
-
-    public async Task<Ong> Editar(EditOngModel ong)
-    {
-        var ongEdit = await _repository.PegarPorId(ong.Id);
-
-        if (ongEdit == null)
-            return null;
-
-        ongEdit = await _repository.Editar(ong);
-
-        return ongEdit;
-    }
 
     public async Task<List<Ong>> PegarTodos()
     {
         return await _repository.PegarTodos();
     }
 
-    public async Task<Ong> PegarPorId(int id)
+    public Ong PegarPorId(int id)
     {
-        var ong = await _repository.PegarPorId(id);
+        var ong = _repository.PegarPorId(id);
 
         if (ong == null)
             return null;
 
-        return await _repository.PegarPorId(id);
+        return _repository.PegarPorId(id);
+    }
+
+    public async Task<Ong> Cadastrar(InputOngModel inputOngModel)
+    {
+        if (inputOngModel == null)
+            throw new Exception("Ong sem informações");
+
+        var ong = new Ong 
+        (
+        inputOngModel.Nome,
+        inputOngModel.CNPJ,
+        inputOngModel.Telefone,
+        inputOngModel.Email,
+        inputOngModel.AreaAtuacao,
+        inputOngModel.QuantidadeEmpregados,
+        inputOngModel.Endereco
+        );
+
+        await _repository.Cadastrar(ong);
+        return ong;
+    }
+    
+    public async Task AdicionarVaga(Ong ong)
+    {
+        if (ong == null)
+            throw new Exception("Vaga sem informações");
+        
+        _repository.AdicionarVaga(ong);
+    }
+
+    public async Task AdicionarFinanceiro(Ong ong)
+    {
+        if (ong == null)
+            throw new Exception("Financeiro sem informações");
+        
+        _repository.AdicionarFinanceiro(ong);
+    }
+
+    public async Task<Ong> Editar(EditOngModel editOngModel)
+    {
+        var ongEdit = _repository.PegarPorId(editOngModel.Id);
+
+        if (ongEdit == null)
+            return null;
+
+        ongEdit.Id = editOngModel.Id;
+        ongEdit.Telefone = editOngModel.Telefone;
+        ongEdit.Email = editOngModel.Email;
+        ongEdit.QuantidadeEmpregados = editOngModel.QuantidadeEmpregados;
+        ongEdit.Endereco = editOngModel.Endereco;
+
+        ongEdit = await _repository.Editar(ongEdit);
+
+        return ongEdit;
     }
 
     public async Task<bool> Deletar(int id)
     {
-        var voluntario = await _repository.PegarPorId(id);
+        var voluntario = _repository.PegarPorId(id);
 
         if (voluntario == null)
             return false;
-        //return Boolean
-        await _repository.Deletar(voluntario);
+            
+        await _repository.Deletar(id);
         return true;
     }
 }

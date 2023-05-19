@@ -1,10 +1,6 @@
 using ONGLIVES.API.Entidades;
+using ONGLIVES.API.Interfaces.ServicosInfraestrutura;
 
-public interface IVagaRepository 
+public interface IVagaRepository : IGenericRepository<Vaga>
 {
-    public Task<List<Vaga>> PegarTodos();
-    public Task<Vaga> PegarPorId(int id);
-    public Task<Vaga> Cadastrar(Vaga vaga);
-    public Task<Vaga> Editar(EditVagaModel vaga);
-    public Task Deletar(Vaga vaga);
 }
